@@ -12,7 +12,9 @@
         },
         "action": {
           "type": "string",
-          "enum": ["on_cancel"],
+          "enum": [
+            "on_cancel"
+          ],
           "description": "API endpoint callback"
         },
         "domain": {
@@ -31,7 +33,9 @@
                   "description": "Country code as per ISO 3166-1 alpha-3 standard"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             },
             "city": {
               "type": "object",
@@ -41,10 +45,15 @@
                   "description": "City code"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             }
           },
-          "required": ["country", "city"]
+          "required": [
+            "country",
+            "city"
+          ]
         },
         "bap_id": {
           "type": "string",
@@ -90,7 +99,19 @@
           "description": "Schema context URLs"
         }
       },
-      "required": ["version", "action", "domain", "location", "bap_id", "bap_uri", "bpp_id", "bpp_uri", "transaction_id", "message_id", "timestamp"]
+      "required": [
+        "version",
+        "action",
+        "domain",
+        "location",
+        "bap_id",
+        "bap_uri",
+        "bpp_id",
+        "bpp_uri",
+        "transaction_id",
+        "message_id",
+        "timestamp"
+      ]
     },
     "message": {
       "type": "object",
@@ -105,7 +126,9 @@
             },
             "@type": {
               "type": "string",
-              "enum": ["beckn:Order"],
+              "enum": [
+                "beckn:Order"
+              ],
               "description": "Order type"
             },
             "beckn:id": {
@@ -121,7 +144,10 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["FULL", "PARTIAL"]
+                  "enum": [
+                    "FULL",
+                    "PARTIAL"
+                  ]
                 },
                 "refund_amount": {
                   "type": "object",
@@ -133,11 +159,18 @@
                       "type": "string"
                     }
                   },
-                  "required": ["currency", "value"]
+                  "required": [
+                    "currency",
+                    "value"
+                  ]
                 },
                 "cancelled_by": {
                   "type": "string",
-                  "enum": ["BUYER", "SELLER", "SYSTEM"]
+                  "enum": [
+                    "BUYER",
+                    "SELLER",
+                    "SYSTEM"
+                  ]
                 },
                 "cancellation_reason_id": {
                   "type": "string"
@@ -146,13 +179,21 @@
                   "type": "string"
                 }
               },
-              "required": ["type", "cancelled_by"]
+              "required": [
+                "type",
+                "cancelled_by"
+              ]
             }
           },
-          "required": ["@type", "beckn:id"]
+          "required": [
+            "@type",
+            "beckn:id"
+          ]
         }
       },
-      "required": ["order"]
+      "required": [
+        "order"
+      ]
     },
     "error": {
       "type": "object",
@@ -172,6 +213,15 @@
       }
     }
   },
-  "required": ["context", "message"],
-  "additionalProperties": false
+  "required": [
+    "context",
+    "message"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "summary": "On cancel response",
+      "externalValue": "../../../tmp/v2/20_on_cancel/cpo-cancels-reservation.json"
+    }
+  ]
 }

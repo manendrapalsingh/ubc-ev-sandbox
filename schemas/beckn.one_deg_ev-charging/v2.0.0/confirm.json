@@ -12,7 +12,9 @@
         },
         "action": {
           "type": "string",
-          "enum": ["confirm"],
+          "enum": [
+            "confirm"
+          ],
           "description": "API endpoint to be called"
         },
         "domain": {
@@ -31,7 +33,9 @@
                   "description": "Country code as per ISO 3166-1 alpha-3 standard"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             },
             "city": {
               "type": "object",
@@ -41,10 +45,15 @@
                   "description": "City code"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             }
           },
-          "required": ["country", "city"]
+          "required": [
+            "country",
+            "city"
+          ]
         },
         "bap_id": {
           "type": "string",
@@ -90,7 +99,19 @@
           "description": "Schema context URLs"
         }
       },
-      "required": ["version", "action", "domain", "location", "bap_id", "bap_uri", "bpp_id", "bpp_uri", "transaction_id", "message_id", "timestamp"]
+      "required": [
+        "version",
+        "action",
+        "domain",
+        "location",
+        "bap_id",
+        "bap_uri",
+        "bpp_id",
+        "bpp_uri",
+        "transaction_id",
+        "message_id",
+        "timestamp"
+      ]
     },
     "message": {
       "type": "object",
@@ -105,7 +126,9 @@
             },
             "@type": {
               "type": "string",
-              "enum": ["beckn:Order"],
+              "enum": [
+                "beckn:Order"
+              ],
               "description": "Order type"
             },
             "beckn:id": {
@@ -133,14 +156,18 @@
                 },
                 "@type": {
                   "type": "string",
-                  "enum": ["beckn:Party"]
+                  "enum": [
+                    "beckn:Party"
+                  ]
                 },
                 "beckn:id": {
                   "type": "string"
                 },
                 "beckn:role": {
                   "type": "string",
-                  "enum": ["BUYER"]
+                  "enum": [
+                    "BUYER"
+                  ]
                 },
                 "beckn:name": {
                   "type": "string"
@@ -186,7 +213,10 @@
                   }
                 }
               },
-              "required": ["currency", "value"]
+              "required": [
+                "currency",
+                "value"
+              ]
             },
             "beckn:fulfillment": {
               "type": "object",
@@ -197,7 +227,9 @@
                 },
                 "@type": {
                   "type": "string",
-                  "enum": ["beckn:Fulfillment"]
+                  "enum": [
+                    "beckn:Fulfillment"
+                  ]
                 },
                 "beckn:id": {
                   "type": "string"
@@ -219,7 +251,9 @@
                 },
                 "@type": {
                   "type": "string",
-                  "enum": ["beckn:Payment"]
+                  "enum": [
+                    "beckn:Payment"
+                  ]
                 },
                 "beckn:id": {
                   "type": "string"
@@ -237,7 +271,10 @@
                       "type": "number"
                     }
                   },
-                  "required": ["currency", "value"]
+                  "required": [
+                    "currency",
+                    "value"
+                  ]
                 },
                 "beckn:paymentURL": {
                   "type": "string",
@@ -261,12 +298,25 @@
               "type": "object"
             }
           },
-          "required": ["@type"]
+          "required": [
+            "@type"
+          ]
         }
       },
-      "required": ["order"]
+      "required": [
+        "order"
+      ]
     }
   },
-  "required": ["context", "message"],
-  "additionalProperties": false
+  "required": [
+    "context",
+    "message"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "summary": "Confirm request for charging session",
+      "externalValue": "../../../tmp/v2/07_confirm/time-based-ev-charging-slot-confirm.json"
+    }
+  ]
 }

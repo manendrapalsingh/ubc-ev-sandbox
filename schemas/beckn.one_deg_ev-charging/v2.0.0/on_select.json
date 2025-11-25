@@ -13,7 +13,9 @@
         },
         "action": {
           "type": "string",
-          "enum": ["on_select"],
+          "enum": [
+            "on_select"
+          ],
           "description": "API endpoint callback"
         },
         "location": {
@@ -27,7 +29,9 @@
                   "description": "Country code"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             },
             "city": {
               "type": "object",
@@ -37,10 +41,15 @@
                   "description": "City code"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             }
           },
-          "required": ["country", "city"]
+          "required": [
+            "country",
+            "city"
+          ]
         },
         "version": {
           "type": "string",
@@ -92,7 +101,19 @@
           "description": "Schema context URLs"
         }
       },
-      "required": ["domain", "action", "location", "version", "bap_id", "bap_uri", "bpp_id", "bpp_uri", "transaction_id", "message_id", "timestamp"]
+      "required": [
+        "domain",
+        "action",
+        "location",
+        "version",
+        "bap_id",
+        "bap_uri",
+        "bpp_id",
+        "bpp_uri",
+        "transaction_id",
+        "message_id",
+        "timestamp"
+      ]
     },
     "message": {
       "type": "object",
@@ -107,7 +128,9 @@
             },
             "@type": {
               "type": "string",
-              "enum": ["beckn:Order"],
+              "enum": [
+                "beckn:Order"
+              ],
               "description": "Order type"
             },
             "beckn:id": {
@@ -127,7 +150,10 @@
               "description": "Seller identifier"
             },
             "beckn:buyer": {
-              "type": ["string", "object"],
+              "type": [
+                "string",
+                "object"
+              ],
               "description": "Buyer identifier or object"
             },
             "beckn:orderItems": {
@@ -153,7 +179,10 @@
                   }
                 }
               },
-              "required": ["currency", "value"]
+              "required": [
+                "currency",
+                "value"
+              ]
             },
             "beckn:fulfillment": {
               "type": "object",
@@ -164,7 +193,9 @@
                 },
                 "@type": {
                   "type": "string",
-                  "enum": ["beckn:Fulfillment"]
+                  "enum": [
+                    "beckn:Fulfillment"
+                  ]
                 },
                 "beckn:id": {
                   "type": "string"
@@ -189,7 +220,9 @@
                 },
                 "@type": {
                   "type": "string",
-                  "enum": ["beckn:Payment"]
+                  "enum": [
+                    "beckn:Payment"
+                  ]
                 },
                 "beckn:id": {
                   "type": "string"
@@ -207,7 +240,10 @@
                       "type": "number"
                     }
                   },
-                  "required": ["currency", "value"]
+                  "required": [
+                    "currency",
+                    "value"
+                  ]
                 },
                 "beckn:paymentURL": {
                   "type": "string",
@@ -260,7 +296,9 @@
                   }
                 }
               },
-              "required": ["id"]
+              "required": [
+                "id"
+              ]
             },
             "items": {
               "type": "array",
@@ -291,7 +329,10 @@
                         "type": "string"
                       }
                     },
-                    "required": ["value", "currency"]
+                    "required": [
+                      "value",
+                      "currency"
+                    ]
                   },
                   "quantity": {
                     "type": "object",
@@ -331,7 +372,9 @@
                     }
                   }
                 },
-                "required": ["id"]
+                "required": [
+                  "id"
+                ]
               }
             },
             "fulfillments": {
@@ -344,7 +387,11 @@
                   },
                   "type": {
                     "type": "string",
-                    "enum": ["CHARGING", "BATTERY-SWAP", "MOBILE-BATTERY-SWAP"]
+                    "enum": [
+                      "CHARGING",
+                      "BATTERY-SWAP",
+                      "MOBILE-BATTERY-SWAP"
+                    ]
                   },
                   "stops": {
                     "type": "array",
@@ -353,7 +400,10 @@
                       "properties": {
                         "type": {
                           "type": "string",
-                          "enum": ["start", "end"]
+                          "enum": [
+                            "start",
+                            "end"
+                          ]
                         },
                         "time": {
                           "type": "object",
@@ -408,7 +458,10 @@
                     }
                   }
                 },
-                "required": ["id", "type"]
+                "required": [
+                  "id",
+                  "type"
+                ]
               }
             },
             "quote": {
@@ -426,7 +479,10 @@
                       "description": "Currency code"
                     }
                   },
-                  "required": ["value", "currency"]
+                  "required": [
+                    "value",
+                    "currency"
+                  ]
                 },
                 "breakup": {
                   "type": "array",
@@ -491,20 +547,30 @@
                             "type": "string"
                           }
                         },
-                        "required": ["value", "currency"]
+                        "required": [
+                          "value",
+                          "currency"
+                        ]
                       }
                     },
-                    "required": ["price"]
+                    "required": [
+                      "price"
+                    ]
                   }
                 }
               },
-              "required": ["price", "breakup"]
+              "required": [
+                "price",
+                "breakup"
+              ]
             }
           },
           "required": []
         }
       },
-      "required": ["order"]
+      "required": [
+        "order"
+      ]
     }
   },
   "error": {
@@ -524,7 +590,15 @@
       }
     }
   },
-  "required": ["context", "message"],
-  "additionalProperties": false
+  "required": [
+    "context",
+    "message"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "summary": "On select response payload",
+      "externalValue": "../../../tmp/v2/04_on_select/time-based-ev-charging-slot-on-select.json"
+    }
+  ]
 }
-

@@ -12,7 +12,9 @@
         },
         "action": {
           "type": "string",
-          "enum": ["track"],
+          "enum": [
+            "track"
+          ],
           "description": "API endpoint to be called"
         },
         "domain": {
@@ -31,7 +33,9 @@
                   "description": "Country code as per ISO 3166-1 alpha-3 standard"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             },
             "city": {
               "type": "object",
@@ -41,10 +45,15 @@
                   "description": "City code"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             }
           },
-          "required": ["country", "city"]
+          "required": [
+            "country",
+            "city"
+          ]
         },
         "bap_id": {
           "type": "string",
@@ -90,7 +99,19 @@
           "description": "Schema context URLs"
         }
       },
-      "required": ["version", "action", "domain", "location", "bap_id", "bap_uri", "bpp_id", "bpp_uri", "transaction_id", "message_id", "timestamp"]
+      "required": [
+        "version",
+        "action",
+        "domain",
+        "location",
+        "bap_id",
+        "bap_uri",
+        "bpp_id",
+        "bpp_uri",
+        "transaction_id",
+        "message_id",
+        "timestamp"
+      ]
     },
     "message": {
       "type": "object",
@@ -105,7 +126,9 @@
             },
             "@type": {
               "type": "string",
-              "enum": ["beckn:Order"],
+              "enum": [
+                "beckn:Order"
+              ],
               "description": "Order type"
             },
             "beckn:id": {
@@ -113,12 +136,26 @@
               "description": "Order identifier"
             }
           },
-          "required": ["@type", "beckn:id"]
+          "required": [
+            "@type",
+            "beckn:id"
+          ]
         }
       },
-      "required": ["order"]
+      "required": [
+        "order"
+      ]
     }
   },
-  "required": ["context", "message"],
-  "additionalProperties": false
+  "required": [
+    "context",
+    "message"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "summary": "Track request for active session",
+      "externalValue": "../../../tmp/v2/11_track/time-based-ev-charging-slot-track.json"
+    }
+  ]
 }

@@ -13,7 +13,9 @@
         },
         "action": {
           "type": "string",
-          "enum": ["select"],
+          "enum": [
+            "select"
+          ],
           "description": "API endpoint to be called"
         },
         "location": {
@@ -27,7 +29,9 @@
                   "description": "Country code"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             },
             "city": {
               "type": "object",
@@ -37,10 +41,15 @@
                   "description": "City code"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             }
           },
-          "required": ["country", "city"]
+          "required": [
+            "country",
+            "city"
+          ]
         },
         "version": {
           "type": "string",
@@ -92,7 +101,19 @@
           "description": "Schema context URLs"
         }
       },
-      "required": ["domain", "action", "location", "version", "bap_id", "bap_uri", "bpp_id", "bpp_uri", "transaction_id", "message_id", "timestamp"]
+      "required": [
+        "domain",
+        "action",
+        "location",
+        "version",
+        "bap_id",
+        "bap_uri",
+        "bpp_id",
+        "bpp_uri",
+        "transaction_id",
+        "message_id",
+        "timestamp"
+      ]
     },
     "message": {
       "type": "object",
@@ -107,7 +128,9 @@
             },
             "@type": {
               "type": "string",
-              "enum": ["beckn:Order"],
+              "enum": [
+                "beckn:Order"
+              ],
               "description": "Order type"
             },
             "beckn:id": {
@@ -164,7 +187,10 @@
                   }
                 }
               },
-              "required": ["currency", "value"]
+              "required": [
+                "currency",
+                "value"
+              ]
             },
             "beckn:orderItems": {
               "type": "array",
@@ -189,7 +215,9 @@
                       },
                       "@type": {
                         "type": "string",
-                        "enum": ["beckn:Offer"]
+                        "enum": [
+                          "beckn:Offer"
+                        ]
                       },
                       "beckn:id": {
                         "type": "string"
@@ -235,7 +263,10 @@
                             }
                           }
                         },
-                        "required": ["currency", "value"]
+                        "required": [
+                          "currency",
+                          "value"
+                        ]
                       },
                       "beckn:validity": {
                         "type": "object",
@@ -279,7 +310,9 @@
                     }
                   }
                 },
-                "required": ["beckn:orderedItem"]
+                "required": [
+                  "beckn:orderedItem"
+                ]
               },
               "minItems": 1
             },
@@ -292,7 +325,9 @@
                 },
                 "@type": {
                   "type": "string",
-                  "enum": ["beckn:Fulfillment"]
+                  "enum": [
+                    "beckn:Fulfillment"
+                  ]
                 },
                 "beckn:id": {
                   "type": "string"
@@ -320,7 +355,9 @@
                 },
                 "@type": {
                   "type": "string",
-                  "enum": ["beckn:Payment"]
+                  "enum": [
+                    "beckn:Payment"
+                  ]
                 },
                 "beckn:id": {
                   "type": "string"
@@ -364,9 +401,20 @@
           }
         }
       },
-      "required": ["order"]
+      "required": [
+        "order"
+      ]
     }
   },
-  "required": ["context", "message"],
-  "additionalProperties": false
+  "required": [
+    "context",
+    "message"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "summary": "Select request with time-based slot",
+      "externalValue": "../../../tmp/v2/03_select/time-based-ev-charging-slot-select.json"
+    }
+  ]
 }

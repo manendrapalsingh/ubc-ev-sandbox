@@ -12,7 +12,9 @@
         },
         "action": {
           "type": "string",
-          "enum": ["discover"],
+          "enum": [
+            "discover"
+          ],
           "description": "API endpoint to be called"
         },
         "domain": {
@@ -31,7 +33,9 @@
                   "description": "Country code as per ISO 3166-1 alpha-3 standard"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             },
             "city": {
               "type": "object",
@@ -41,10 +45,15 @@
                   "description": "City code"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             }
           },
-          "required": ["country", "city"]
+          "required": [
+            "country",
+            "city"
+          ]
         },
         "bap_id": {
           "type": "string",
@@ -81,7 +90,17 @@
           "description": "Schema context URLs"
         }
       },
-      "required": ["version", "action", "domain", "location", "bap_id", "bap_uri", "transaction_id", "message_id", "timestamp"]
+      "required": [
+        "version",
+        "action",
+        "domain",
+        "location",
+        "bap_id",
+        "bap_uri",
+        "transaction_id",
+        "message_id",
+        "timestamp"
+      ]
     },
     "message": {
       "type": "object",
@@ -97,7 +116,11 @@
             "properties": {
               "op": {
                 "type": "string",
-                "enum": ["s_dwithin", "s_within", "s_intersects"],
+                "enum": [
+                  "s_dwithin",
+                  "s_within",
+                  "s_intersects"
+                ],
                 "description": "Spatial operation"
               },
               "targets": {
@@ -109,7 +132,11 @@
                 "properties": {
                   "type": {
                     "type": "string",
-                    "enum": ["Point", "LineString", "Polygon"],
+                    "enum": [
+                      "Point",
+                      "LineString",
+                      "Polygon"
+                    ],
                     "description": "Geometry type"
                   },
                   "coordinates": {
@@ -138,14 +165,21 @@
                     ]
                   }
                 },
-                "required": ["type", "coordinates"]
+                "required": [
+                  "type",
+                  "coordinates"
+                ]
               },
               "distanceMeters": {
                 "type": "number",
                 "description": "Distance in meters for spatial queries"
               }
             },
-            "required": ["op", "targets", "geometry"]
+            "required": [
+              "op",
+              "targets",
+              "geometry"
+            ]
           }
         },
         "filters": {
@@ -153,7 +187,9 @@
           "properties": {
             "type": {
               "type": "string",
-              "enum": ["jsonpath"],
+              "enum": [
+                "jsonpath"
+              ],
               "description": "Filter type"
             },
             "expression": {
@@ -161,11 +197,23 @@
               "description": "JSONPath expression for filtering"
             }
           },
-          "required": ["type", "expression"]
+          "required": [
+            "type",
+            "expression"
+          ]
         }
       }
     }
   },
-  "required": ["context", "message"],
-  "additionalProperties": false
+  "required": [
+    "context",
+    "message"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "summary": "Discover request with connection+power filter",
+      "externalValue": "../../../tmp/v2/01_discover/discovery-within-boundary-with-connection-spec.json"
+    }
+  ]
 }

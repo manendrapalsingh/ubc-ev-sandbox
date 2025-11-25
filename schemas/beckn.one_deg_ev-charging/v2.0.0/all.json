@@ -65,12 +65,31 @@
           "description": "Time to live"
         }
       },
-      "required": ["domain", "action", "version", "core_version", "bap_id", "bap_uri", "timestamp", "message_id", "transaction_id"]
+      "required": [
+        "domain",
+        "action",
+        "version",
+        "core_version",
+        "bap_id",
+        "bap_uri",
+        "timestamp",
+        "message_id",
+        "transaction_id"
+      ]
     },
     "message": {
       "type": "object"
     }
   },
-  "required": ["context", "message"],
-  "additionalProperties": true
+  "required": [
+    "context",
+    "message"
+  ],
+  "additionalProperties": true,
+  "examples": [
+    {
+      "summary": "Combined schema example",
+      "externalValue": "../../../tmp/v2/01_discover/discovery-along-route.json"
+    }
+  ]
 }

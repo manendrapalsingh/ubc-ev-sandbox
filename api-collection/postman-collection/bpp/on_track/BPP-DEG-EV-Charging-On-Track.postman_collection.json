@@ -1,56 +1,59 @@
 {
-	"info": {
-		"_postman_id": "65d469fe-b469-40f7-b7f9-0479fc855cef",
-		"name": "BPP-DEG:EV-Charging-On-Track",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30848972"
-	},
-	"item": [
-		{
-			"name": "on_track",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"context\": {\n    \"version\": \"{{version}}\",\n    \"action\": \"on_track\",\n    \"domain\": \"{{domain}}\",\n    \"location\": {\n      \"country\": {\n        \"code\": \"IND\"\n      },\n      \"city\": {\n        \"code\": \"std:080\"\n      }\n    },\n    \"bap_id\": \"{{bap_id}}\",\n    \"bap_uri\": \"{{bap_uri}}\",\n    \"bpp_id\": \"{{bpp_id}}\",\n    \"bpp_uri\": \"{{bpp_uri}}\",\n    \"transaction_id\": \"{{transaction_id}}\",\n    \"message_id\": \"{{$guid}}\",\n    \"timestamp\": \"{{timestamp}}\",\n    \"ttl\": \"PT30S\",\n    \"schema_context\": [\n      \"https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schemas/charging_service/v1/context.jsonld\"\n    ]\n  },\n  \"message\": {\n    \"tracking\": {\n      \"@context\": \"https://becknprotocol.io/schemas/core/v2/Tracking/schema-context.jsonld\",\n      \"@type\": \"beckn:Tracking\",\n      \"beckn:fulfillment\": {\n        \"@context\": \"https://becknprotocol.io/schemas/core/v2/Fulfillment/schema-context.jsonld\",\n        \"@type\": \"beckn:Fulfillment\",\n        \"beckn:id\": \"fulfillment-001\",\n        \"beckn:status\": \"ACTIVE\",\n        \"trackingAction\": {\n          \"@type\": \"schema:TrackAction\",\n          \"target\": {\n            \"@type\": \"schema:EntryPoint\",\n            \"url\": \"https://track.bluechargenet-aggregator.io/session/SESSION-9876543210\"\n          },\n          \"deliveryMethod\": \"RESERVATION\",\n          \"reservationId\": \"TRACK-SESSION-9876543210\"\n        },\n        \"beckn:deliveryAttributes\": {\n          \"@type\": \"ChargingSession\",\n          \"sessionId\": \"session-001\",\n          \"sessionStatus\": \"ACTIVE\",\n          \"sessionType\": \"CHARGING\",\n          \"startTime\": \"2025-01-27T10:15:00Z\",\n          \"endTime\": \"2025-01-27T11:45:00Z\",\n          \"currentPowerKW\": 45.5,\n          \"energyDeliveredKWh\": 2.3,\n          \"chargingProgress\": 46,\n          \"estimatedCompletionTime\": \"2025-01-27T11:00:00Z\",\n          \"customer\": {\n            \"name\": \"Ravi Kumar\",\n            \"phone\": \"+91-9887766554\"\n          },\n          \"vehicle\": {\n            \"make\": \"Tata\",\n            \"model\": \"Nexon EV\"\n          },\n          \"location\": {\n            \"gps\": \"28.345345,77.389754\",\n            \"address\": \"Connaught Place, New Delhi\",\n            \"descriptor\": {\n              \"name\": \"BlueCharge Connaught Place Station\"\n            }\n          },\n          \"connectorType\": \"CCS2\",\n          \"maxPowerKW\": 50,\n          \"stationStatus\": \"Charging\",\n          \"authorizationMode\": \"OTP\",\n          \"authorizationToken\": \"7484\"\n        }\n      },\n      \"beckn:order\": {\n        \"@context\": \"https://becknprotocol.io/schemas/core/v2/Order/schema-context.jsonld\",\n        \"@type\": \"beckn:Order\",\n        \"beckn:id\": \"order-bpp-789012\",\n        \"beckn:orderStatus\": \"ACTIVE\",\n        \"beckn:orderNumber\": \"ORD-2025-001\"\n      }\n    }\n  }\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{on_track_url}}",
-					"host": [
-						"{{on_track_url}}"
-					],
-					"path": []
-				}
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [""]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [""]
-			}
-		}
-	]
+  "info": {
+    "_postman_id": "65d469fe-b469-40f7-b7f9-0479fc855cef",
+    "name": "BPP-DEG:EV-Charging-On-Track",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30848972"
+  },
+  "item": [
+    {
+      "name": "on_track",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"context\": {\n    \"version\": \"2.0.0\",\n    \"action\": \"on_track\",\n    \"domain\": \"beckn.one:deg:ev-charging:*\",\n    \"bpp_id\": \"example-bpp.com\",\n    \"bpp_uri\": \"https://example-bpp.com/pilot/bap/energy/v2\",\n    \"transaction_id\": \"2b4d69aa-22e4-4c78-9f56-5a7b9e2b2002\",\n    \"message_id\": \"6ace310b-6440-4421-a2ed-b484c7548bd5\",\n    \"timestamp\": \"2025-01-27T17:00:40.065Z\",\n    \"ttl\": \"PT30S\"\n  },\n  \"message\": {\n    \"order\": {\n      \"@context\": \"https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld\",\n      \"@type\": \"beckn:Order\",\n      \"beckn:id\": \"order-bpp-789012\",\n      \"beckn:orderStatus\": \"ACTIVE\",\n      \"beckn:orderItems\": [\n        {\n          \"beckn:lineId\": \"line-001\",\n          \"beckn:orderedItem\": \"pe-charging-01\"\n        }\n      ],\n      \"beckn:fulfillment\": {\n        \"@context\": \"https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld\",\n        \"@type\": \"beckn:Fulfillment\",\n        \"beckn:id\": \"fulfillment-001\",\n        \"beckn:mode\": \"RESERVATION\",\n        \"beckn:status\": \"ACTIVE\",\n        \"trackingAction\": {\n          \"@type\": \"schema:TrackAction\",\n          \"target\": {\n            \"@type\": \"schema:EntryPoint\",\n            \"url\": \"https://track.bluechargenet-aggregator.io/session/SESSION-9876543210\"\n          },\n          \"deliveryMethod\": \"RESERVATION\",\n          \"reservationId\": \"TRACK-SESSION-9876543210\"\n        },\n        \"deliveryAttributes\": {\n          \"@context\": \"https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingService/v1/context.jsonld\",\n          \"@type\": \"ChargingSession\",\n          \"chargingTelemetry\": [\n            {\n              \"eventTime\": \"2025-01-27T17:00:00Z\",\n              \"metrics\": [\n                {\n                  \"name\": \"STATE_OF_CHARGE\",\n                  \"value\": 62.5,\n                  \"unitCode\": \"PERCENTAGE\"\n                },\n                {\n                  \"name\": \"POWER\",\n                  \"value\": 18.4,\n                  \"unitCode\": \"KWH\"\n                },\n                {\n                  \"name\": \"ENERGY\",\n                  \"value\": 10.2,\n                  \"unitCode\": \"KW\"\n                },\n                {\n                  \"name\": \"VOLTAGE\",\n                  \"value\": 392,\n                  \"unitCode\": \"VLT\"\n                },\n                {\n                  \"name\": \"CURRENT\",\n                  \"value\": 47.0,\n                  \"unitCode\": \"AMP\"\n                }\n              ]\n            },\n            {\n              \"eventTime\": \"2025-01-27T17:05:00Z\",\n              \"metrics\": [\n                {\n                  \"name\": \"STATE_OF_CHARGE\",\n                  \"value\": 65.0,\n                  \"unitCode\": \"PERCENTAGE\"\n                },\n                {\n                  \"name\": \"POWER\",\n                  \"value\": 17.1,\n                  \"unitCode\": \"KWH\"\n                },\n                {\n                  \"name\": \"ENERGY\",\n                  \"value\": 11.1,\n                  \"unitCode\": \"KW\"\n                },\n                {\n                  \"name\": \"VOLTAGE\",\n                  \"value\": 388,\n                  \"unitCode\": \"VLT\"\n                },\n                {\n                  \"name\": \"CURRENT\",\n                  \"value\": 44.2,\n                  \"unitCode\": \"AMP\"\n                }\n              ]\n            }\n          ]\n        }\n      }\n    }\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{on_track_url}}",
+          "host": [
+            "{{on_track_url}}"
+          ],
+          "path": []
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
 }
-

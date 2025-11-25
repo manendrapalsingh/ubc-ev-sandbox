@@ -60,33 +60,8 @@ paths:
               $ref: '#/components/schemas/DiscoverRequest'
             examples:
               spatialQuery:
-                summary: Spatial query within boundary
-                value:
-                  context:
-                    version: "2.0.0"
-                    action: "discover"
-                    domain: "beckn.one:deg:ev-charging"
-                    location:
-                      country:
-                        code: "IND"
-                      city:
-                        code: "std:080"
-                    bap_id: "ev-charging.sandbox1.com"
-                    bap_uri: "http://onix-bap:8081/bap/receiver"
-                    transaction_id: "2b4d69aa-22e4-4c78-9f56-5a7b9e2b2002"
-                    message_id: "msg-001"
-                    timestamp: "2025-01-27T10:00:00Z"
-                    ttl: "PT30S"
-                    schema_context:
-                      - "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schemas/charging_service/v1/context.jsonld"
-                  message:
-                    spatial:
-                      - op: "s_dwithin"
-                        targets: "$['beckn:availableAt'][*]['geo']"
-                        geometry:
-                          type: "Point"
-                          coordinates: [77.59, 12.94]
-                        distanceMeters: 10000
+                summary: Spatial query within boundary (connection+power filter)
+                externalValue: ../tmp/v2/01_discover/discovery-within-boundary-with-connection-spec.json
       responses:
         '200':
           description: ACK - Request accepted and will be processed asynchronously
@@ -122,6 +97,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SelectRequest'
+            examples:
+              sample:
+                summary: Select request using time-based charging slot
+                externalValue: ../tmp/v2/03_select/time-based-ev-charging-slot-select.json
       responses:
         '200':
           description: ACK - Request accepted
@@ -157,6 +136,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/InitRequest'
+            examples:
+              sample:
+                summary: Init request with charging session details
+                externalValue: ../tmp/v2/05_init/time-based-ev-charging-slot-init.json
       responses:
         '200':
           description: ACK - Request accepted
@@ -192,6 +175,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ConfirmRequest'
+            examples:
+              sample:
+                summary: Confirm request for charging session booking
+                externalValue: ../tmp/v2/07_confirm/time-based-ev-charging-slot-confirm.json
       responses:
         '200':
           description: ACK - Request accepted
@@ -227,6 +214,13 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateRequest'
+            examples:
+              startCharging:
+                summary: Update request to start charging session
+                externalValue: ../tmp/v2/09_update/ev-charging-session-start-update.json
+              endCharging:
+                summary: Update request to end charging session
+                externalValue: ../tmp/v2/09_update/ev-charging-session-end-update.json
       responses:
         '200':
           description: ACK - Request accepted
@@ -262,6 +256,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/TrackRequest'
+            examples:
+              sample:
+                summary: Track request for active charging session
+                externalValue: ../tmp/v2/11_track/time-based-ev-charging-slot-track.json
       responses:
         '200':
           description: ACK - Request accepted
@@ -297,6 +295,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CancelRequest'
+            examples:
+              sample:
+                summary: Cancel request for reserved slot
+                externalValue: ../tmp/v2/19_cancel/cancel-a-reserved-slot.json
       responses:
         '200':
           description: ACK - Request accepted
@@ -332,6 +334,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RatingRequest'
+            examples:
+              sample:
+                summary: Rating request for charging session
+                externalValue: ../tmp/v2/15_rating/time-based-ev-charging-slot-rating.json
       responses:
         '200':
           description: ACK - Request accepted
@@ -367,6 +373,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SupportRequest'
+            examples:
+              sample:
+                summary: Support request referencing order
+                externalValue: ../tmp/v2/17_support/time-based-ev-charging-slot-support.json
       responses:
         '200':
           description: ACK - Request accepted

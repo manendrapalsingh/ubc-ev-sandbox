@@ -12,7 +12,9 @@
         },
         "action": {
           "type": "string",
-          "enum": ["rating"],
+          "enum": [
+            "rating"
+          ],
           "description": "API endpoint to be called"
         },
         "domain": {
@@ -31,7 +33,9 @@
                   "description": "Country code as per ISO 3166-1 alpha-3 standard"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             },
             "city": {
               "type": "object",
@@ -41,10 +45,15 @@
                   "description": "City code"
                 }
               },
-              "required": ["code"]
+              "required": [
+                "code"
+              ]
             }
           },
-          "required": ["country", "city"]
+          "required": [
+            "country",
+            "city"
+          ]
         },
         "bap_id": {
           "type": "string",
@@ -90,7 +99,19 @@
           "description": "Schema context URLs"
         }
       },
-      "required": ["version", "action", "domain", "location", "bap_id", "bap_uri", "bpp_id", "bpp_uri", "transaction_id", "message_id", "timestamp"]
+      "required": [
+        "version",
+        "action",
+        "domain",
+        "location",
+        "bap_id",
+        "bap_uri",
+        "bpp_id",
+        "bpp_uri",
+        "transaction_id",
+        "message_id",
+        "timestamp"
+      ]
     },
     "message": {
       "type": "object",
@@ -114,7 +135,11 @@
         },
         "category": {
           "type": "string",
-          "enum": ["fulfillment", "provider", "item"],
+          "enum": [
+            "fulfillment",
+            "provider",
+            "item"
+          ],
           "description": "Category of the rating"
         },
         "feedback": {
@@ -134,9 +159,21 @@
           }
         }
       },
-      "required": ["id", "value"]
+      "required": [
+        "id",
+        "value"
+      ]
     }
   },
-  "required": ["context", "message"],
-  "additionalProperties": false
+  "required": [
+    "context",
+    "message"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "summary": "Rating request for session",
+      "externalValue": "../../../tmp/v2/15_rating/time-based-ev-charging-slot-rating.json"
+    }
+  ]
 }

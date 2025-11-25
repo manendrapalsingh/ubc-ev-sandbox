@@ -66,38 +66,7 @@ paths:
             examples:
               catalogResponse:
                 summary: Catalog response with charging stations
-                value:
-                  context:
-                    version: "2.0.0"
-                    action: "on_discover"
-                    domain: "beckn.one:deg:ev-charging"
-                    location:
-                      country:
-                        code: "IND"
-                      city:
-                        code: "std:080"
-                    bap_id: "ev-charging.sandbox1.com"
-                    bap_uri: "http://onix-bap:8081/bap/receiver"
-                    bpp_id: "ev-charging.sandbox2.com"
-                    bpp_uri: "http://onix-bpp:8082/bpp/receiver"
-                    transaction_id: "2b4d69aa-22e4-4c78-9f56-5a7b9e2b2002"
-                    message_id: "msg-response-001"
-                    timestamp: "2025-01-27T10:00:05Z"
-                    ttl: "PT30S"
-                    schema_context:
-                      - "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schemas/charging_service/v1/context.jsonld"
-                  message:
-                    catalogs:
-                      - "@context": "https://becknprotocol.io/schemas/core/v2/Catalog/schema-context.jsonld"
-                        "@type": "beckn:Catalog"
-                        "beckn:descriptor":
-                          name: "EV Charging Services Catalog"
-                        "beckn:items":
-                          - "@context": "https://becknprotocol.io/schemas/core/v2/Item/schema-context.jsonld"
-                            "@type": "beckn:Item"
-                            "beckn:id": "ev-charger-ccs2-001"
-                            "beckn:descriptor":
-                              name: "DC Fast Charger - CCS2 (60kW)"
+                externalValue: ../tmp/v2/02_on_discover/time-based-ev-charging-slot-catalog.json
       responses:
         '200':
           description: ACK - Callback received and acknowledged
@@ -133,6 +102,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OnSelectRequest'
+            examples:
+              sample:
+                summary: On select response payload
+                externalValue: ../tmp/v2/04_on_select/time-based-ev-charging-slot-on-select.json
       responses:
         '200':
           description: ACK - Callback received
@@ -168,6 +141,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OnInitRequest'
+            examples:
+              sample:
+                summary: On init response payload
+                externalValue: ../tmp/v2/06_on_init/time-based-ev-charging-slot-on-init.json
       responses:
         '200':
           description: ACK - Callback received
@@ -203,6 +180,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OnConfirmRequest'
+            examples:
+              sample:
+                summary: On confirm response payload
+                externalValue: ../tmp/v2/08_on_confirm/time-based-ev-charging-slot-on-confirm.json
       responses:
         '200':
           description: ACK - Callback received
@@ -238,6 +219,13 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OnUpdateRequest'
+            examples:
+              activeCharging:
+                summary: On update response while charging
+                externalValue: ../tmp/v2/10_on_update/time-based-ev-charging-slot-on-update.json
+              completeCharging:
+                summary: On update response after charging ends
+                externalValue: ../tmp/v2/14_on_update/time-based-ev-charging-slot-on-update.json
       responses:
         '200':
           description: ACK - Callback received
@@ -273,6 +261,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OnTrackRequest'
+            examples:
+              sample:
+                summary: On track response payload
+                externalValue: ../tmp/v2/12_on_track/time-based-ev-charging-slot-on-track.json
       responses:
         '200':
           description: ACK - Callback received
@@ -308,6 +300,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OnStatusRequest'
+            examples:
+              sample:
+                summary: On status callback (charging error)
+                externalValue: ../tmp/v2/13_on_status/time-based-ev-charging-slot-on-status.json
       responses:
         '200':
           description: ACK - Callback received
@@ -343,6 +339,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OnCancelRequest'
+            examples:
+              sample:
+                summary: On cancel response payload
+                externalValue: ../tmp/v2/20_on_cancel/cpo-cancels-reservation.json
       responses:
         '200':
           description: ACK - Callback received
@@ -378,6 +378,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OnRatingRequest'
+            examples:
+              sample:
+                summary: On rating callback payload
+                externalValue: ../tmp/v2/16_on_rating/time-based-ev-charging-slot-on-rating.json
       responses:
         '200':
           description: ACK - Callback received
@@ -413,6 +417,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OnSupportRequest'
+            examples:
+              sample:
+                summary: On support callback payload
+                externalValue: ../tmp/v2/18_on_support/time-based-ev-charging-slot-on-support.json
       responses:
         '200':
           description: ACK - Callback received
