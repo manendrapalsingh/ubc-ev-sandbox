@@ -12,10 +12,10 @@
       }
     },
     "bap_id": "ev-charging.sandbox1.com",
-    "bap_uri": "http://mock-bap-rabbit-mq:9003",
+    "bap_uri": "http://mock-bap-kafka:9003",
     "bpp_id": "ev-charging.sandbox2.com",
-    "bpp_uri": "http://onix-bpp-plugin-rabbitmq:8002/bpp/receiver",
-    "transaction_id": "550e8400-e29b-41d4-a716-446655440000",
+    "bpp_uri": "http://onix-bpp-plugin-kafka:8002/bpp/receiver",
+    "transaction_id": "2b4d69aa-22e4-4c78-9f56-5a7b9e2b2002",
     "message_id": "990e8400-e29b-41d4-a716-446655440004",
     "timestamp": "2025-01-27T10:00:00Z",
     "ttl": "PT30S",
@@ -103,7 +103,7 @@
             "type": "UNIT",
             "value": 72.73,
             "currency": "INR",
-            "description": "Charging session cost (4.04 kWh @ ₹18.00/kWh)"
+            "description": "Charging session cost (4.04 kWh @ \u20b918.00/kWh)"
           },
           {
             "type": "FEE",
@@ -201,4 +201,3 @@
     }
   }
 }
-
