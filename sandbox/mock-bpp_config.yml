@@ -1,0 +1,18 @@
+server:
+  port: ":9002"
+
+defaults:
+  version: "1.0.0"
+  country_code: "IND"
+  city_code: "std:080"
+  bpp_id: "ev-charging.sandbox2.com"
+  bpp_uri: "http://onix-bpp-plugin:8002"
+
+callback:
+  enabled: true
+  timeout: 100  # milliseconds (30 seconds)
+  response_file: "./request.json"
+  # Callback URI to ONIX BPP adapter
+  # For Docker network: use container name (onix-bpp-plugin:8002)
+  # For external testing: use localhost:8002
+  callback_uri: "http://onix-bpp-plugin:8002"
