@@ -471,15 +471,14 @@ paths:
                     bpp_id: "bpp.example.com"
                     bpp_uri: "https://bpp.example.com/callbacks"
                     ttl: "PT30S"
-                  message:
-                    catalogs:
-                      - "@context": "https://becknprotocol.io/schemas/core/v1/Catalog/schema-context.jsonld"
-                        "@type": "beckn:Catalog"
-                        "beckn:id": "catalog-001"
-                        "beckn:descriptor":
-                          "@type": "beckn:Descriptor"
-                          "schema:name": "BPP Test Catalog"
-                        "beckn:items": []
+                  catalogs:
+                    - "@context": "https://becknprotocol.io/schemas/core/v1/Catalog/schema-context.jsonld"
+                      "@type": "beckn:Catalog"
+                      "beckn:id": "catalog-001"
+                      "beckn:descriptor":
+                        "@type": "beckn:Descriptor"
+                        "schema:name": "BPP Test Catalog"
+                      "beckn:items": []
       responses:
         '200':
           description: ACK - Callback received
@@ -947,27 +946,48 @@ components:
 
     CatalogPublishRequest:
       type: object
-      required: [context, message]
+      required: [context, catalogs]
       properties:
         context:
-          allOf:
-            - $ref: '#/components/schemas/Context'
-            - type: object
-              properties:
-                action:
-                  type: string
-                  enum: [catalog_publish]
-        message:
           type: object
-          required: [catalogs]
+          required: [version, action, timestamp, message_id, transaction_id, bpp_id, bpp_uri, ttl]
           properties:
-            catalogs:
-              type: array
-              description: Array of catalogs containing items
-              items:
-                type: object
-                description: Catalog object containing provider and items information
-              minItems: 1
+            version:
+              type: string
+              description: Version of the Beckn protocol
+              example: "2.0.0"
+            action:
+              type: string
+              enum: [catalog_publish]
+              description: API endpoint action
+            timestamp:
+              type: string
+              format: date-time
+              description: Time at which the request was generated
+            message_id:
+              type: string
+              description: Message identifier
+            transaction_id:
+              type: string
+              description: Transaction identifier
+            bpp_id:
+              type: string
+              description: Identification of the BPP
+            bpp_uri:
+              type: string
+              format: uri
+              description: BPP endpoint (where /on_catalog_publish callback is exposed)
+            ttl:
+              type: string
+              description: Time to live (ISO 8601 duration format)
+              example: "PT30S"
+        catalogs:
+          type: array
+          description: Array of catalogs containing items
+          items:
+            type: object
+            description: Catalog object containing provider and items information
+          minItems: 1
       description: |
         Catalog Publish request envelope.
         *context.version* MUST indicate the supported protocol version (e.g., "2.0.0").
