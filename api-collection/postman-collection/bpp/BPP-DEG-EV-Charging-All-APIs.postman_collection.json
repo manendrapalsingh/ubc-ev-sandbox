@@ -341,6 +341,64 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "catalog_publish",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"context\": {\n    \"version\": \"{{version}}\",\n    \"action\": \"catalog_publish\",\n    \"timestamp\": \"{{timestamp}}\",\n    \"message_id\": \"{{message_id}}\",\n    \"transaction_id\": \"{{transaction_id}}\",\n    \"bpp_id\": \"{{bpp_id}}\",\n    \"bpp_uri\": \"{{bpp_uri}}\",\n    \"ttl\": \"PT30S\"\n  },\n  \"message\": {\n    \"catalogs\": [\n      {\n        \"@context\": \"https://becknprotocol.io/schemas/core/v1/Catalog/schema-context.jsonld\",\n        \"@type\": \"beckn:Catalog\",\n        \"beckn:id\": \"catalog-001\",\n        \"beckn:descriptor\": {\n          \"@type\": \"beckn:Descriptor\",\n          \"schema:name\": \"BPP Test Catalog\"\n        },\n        \"beckn:items\": [\n          {\n            \"@context\": \"https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld\",\n            \"@type\": \"beckn:Item\",\n            \"beckn:id\": \"ev-charger-ccs2-001\",\n            \"beckn:descriptor\": {\n              \"@type\": \"beckn:Descriptor\",\n              \"schema:name\": \"DC Fast Charger - CCS2 (60kW)\",\n              \"beckn:shortDesc\": \"High-speed DC charging station with CCS2 connector\",\n              \"beckn:longDesc\": \"Ultra-fast DC charging station supporting CCS2 connector type with 60kW maximum power output. Features advanced thermal management and smart charging capabilities.\"\n            },\n            \"beckn:category\": {\n              \"@type\": \"schema:CategoryCode\",\n              \"schema:codeValue\": \"ev-charging\",\n              \"schema:name\": \"EV Charging\"\n            },\n            \"beckn:availableAt\": [\n              {\n                \"geo\": {\n                  \"type\": \"Point\",\n                  \"coordinates\": [77.5946, 12.9716]\n                },\n                \"address\": {\n                  \"streetAddress\": \"EcoPower BTM Hub, 100 Ft Rd\",\n                  \"addressLocality\": \"Bengaluru\",\n                  \"addressRegion\": \"Karnataka\",\n                  \"postalCode\": \"560076\",\n                  \"addressCountry\": \"IN\"\n                }\n              }\n            ],\n            \"beckn:availabilityWindow\": {\n              \"@type\": \"beckn:TimePeriod\",\n              \"schema:startTime\": \"06:00:00\",\n              \"schema:endTime\": \"22:00:00\"\n            },\n            \"beckn:rateable\": true,\n            \"beckn:rating\": {\n              \"@type\": \"beckn:Rating\",\n              \"beckn:ratingValue\": 4.5,\n              \"beckn:ratingCount\": 128\n            },\n            \"beckn:isActive\": true,\n            \"beckn:networkId\": [\"bap.net/ev-charging\"],\n            \"beckn:provider\": {\n              \"beckn:id\": \"ecopower-charging\",\n              \"beckn:descriptor\": {\n                \"@type\": \"beckn:Descriptor\",\n                \"schema:name\": \"EcoPower Charging Pvt Ltd\"\n              }\n            },\n            \"beckn:itemAttributes\": {\n              \"@context\": \"https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingService/v1/context.jsonld\",\n              \"@type\": \"ChargingService\",\n              \"connectorType\": \"CCS2\",\n              \"maxPowerKW\": 60,\n              \"minPowerKW\": 5,\n              \"socketCount\": 2,\n              \"reservationSupported\": true,\n              \"serviceLocation\": {\n                \"@type\": \"beckn:Location\",\n                \"geo\": {\n                  \"type\": \"Point\",\n                  \"coordinates\": [77.5946, 12.9716]\n                },\n                \"address\": {\n                  \"streetAddress\": \"EcoPower BTM Hub, 100 Ft Rd\",\n                  \"addressLocality\": \"Bengaluru\",\n                  \"addressRegion\": \"Karnataka\",\n                  \"postalCode\": \"560076\",\n                  \"addressCountry\": \"IN\"\n                }\n              },\n              \"amenityFeature\": [\"Restaurant\", \"Restroom\", \"Wi-Fi\"],\n              \"ocppId\": \"IN-ECO-BTM-01\",\n              \"evseId\": \"IN*ECO*BTM*01*CCS2*A\",\n              \"roamingNetwork\": \"GreenRoam\",\n              \"parkingType\": \"Mall\",\n              \"connectorId\": \"CCS2-A\",\n              \"powerType\": \"DC\",\n              \"connectorFormat\": \"CABLE\",\n              \"chargingSpeed\": \"FAST\",\n              \"stationStatus\": \"Available\"\n            }\n          }\n        ],\n        \"beckn:offers\": [\n          {\n            \"@context\": \"https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld\",\n            \"@type\": \"beckn:Offer\",\n            \"beckn:id\": \"eco-charge-offer-ccs2-60kw-kwh\",\n            \"beckn:descriptor\": {\n              \"@type\": \"beckn:Descriptor\",\n              \"schema:name\": \"Per-kWh Tariff - CCS2 60kW\"\n            },\n            \"beckn:items\": [\"ev-charger-ccs2-001\"],\n            \"beckn:price\": {\n              \"currency\": \"INR\",\n              \"value\": 18.0,\n              \"applicableQuantity\": {\n                \"unitText\": \"Kilowatt Hour\",\n                \"unitCode\": \"KWH\",\n                \"unitQuantity\": 1\n              }\n            },\n            \"beckn:validity\": {\n              \"@type\": \"beckn:TimePeriod\",\n              \"schema:startDate\": \"2025-10-10T00:00:00Z\",\n              \"schema:endDate\": \"2026-04-10T23:59:59Z\"\n            },\n            \"beckn:acceptedPaymentMethod\": [\"UPI\", \"CreditCard\", \"Wallet\"],\n            \"beckn:offerAttributes\": {\n              \"@context\": \"https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingOffer/v1/context.jsonld\",\n              \"@type\": \"ChargingOffer\",\n              \"buyerFinderFee\": {\n                \"feeType\": \"PERCENTAGE\",\n                \"feeValue\": 2.5\n              },\n              \"idleFeePolicy\": \"₹2/min after 10 min post-charge\"\n            },\n            \"beckn:provider\": \"ecopower-charging\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{catalog_publish_url}}",
+          "host": [
+            "{{catalog_publish_url}}"
+          ],
+          "path": []
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "on_catalog_publish",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"context\": {\n    \"version\": \"{{version}}\",\n    \"action\": \"on_catalog_publish\",\n    \"timestamp\": \"{{timestamp}}\",\n    \"message_id\": \"{{message_id}}\",\n    \"transaction_id\": \"{{transaction_id}}\",\n    \"bpp_id\": \"discovery-indexer.example.com\",\n    \"bpp_uri\": \"https://discovery-indexer.example.com\",\n    \"ttl\": \"PT30S\"\n  },\n  \"message\": {\n    \"results\": [\n      {\n        \"catalog_id\": \"catalog-001\",\n        \"status\": \"ACCEPTED\",\n        \"item_count\": 42,\n        \"warnings\": [\n          {\n            \"code\": \"NON_NORMALIZED_BRAND\",\n            \"message\": \"Some brand values were normalized\"\n          }\n        ]\n      },\n      {\n        \"catalog_id\": \"catalog-002\",\n        \"status\": \"REJECTED\",\n        \"error\": {\n          \"code\": \"INVALID_ITEM\",\n          \"message\": \"Invalid item payload at index 3\",\n          \"paths\": \"catalogs[1].items[3]\"\n        }\n      }\n    ]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{on_catalog_publish_url}}",
+          "host": [
+            "{{on_catalog_publish_url}}"
+          ],
+          "path": []
+        }
+      },
+      "response": []
     }
   ],
   "event": [
