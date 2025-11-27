@@ -45,6 +45,8 @@ tags:
     description: Callback endpoints for tracking responses
   - name: Support Callbacks
     description: Callback endpoints for support and rating responses
+  - name: Catalog Publish
+    description: Catalog publish and callback endpoints for catalog ingestion
 
 paths:
   /on_discover:
@@ -421,6 +423,124 @@ paths:
               sample:
                 summary: On support callback payload
                 externalValue: ../tmp/v2/18_on_support/time-based-ev-charging-slot-on-support.json
+      responses:
+        '200':
+          description: ACK - Callback received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AckResponse'
+        '400':
+          description: NAK - Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: NAK - Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /beckn/v2/catalog/publish:
+    post:
+      tags:
+        - Catalog Publish
+      summary: Publish one or more catalogs for indexing
+      description: |
+        BPP submits catalogs to be indexed. Returns **ACK** immediately if accepted for processing.
+        The detailed per-catalog processing result arrives later via **/on_catalog_publish**.
+      operationId: publishCatalogs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogPublishRequest'
+            examples:
+              publish_basic:
+                summary: Minimal publish
+                value:
+                  context:
+                    version: "2.0.0"
+                    action: "catalog_publish"
+                    timestamp: "2025-09-01T10:30:00+05:30"
+                    message_id: "u-req-123"
+                    transaction_id: "u-txn-123"
+                    bpp_id: "bpp.example.com"
+                    bpp_uri: "https://bpp.example.com/callbacks"
+                    ttl: "PT30S"
+                  catalogs:
+                    - "@context": "https://becknprotocol.io/schemas/core/v1/Catalog/schema-context.jsonld"
+                      "@type": "beckn:Catalog"
+                      "beckn:id": "catalog-001"
+                      "beckn:descriptor":
+                        "@type": "beckn:Descriptor"
+                        "schema:name": "BPP Test Catalog"
+                      "beckn:items": []
+      responses:
+        '200':
+          description: ACK - Callback received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AckResponse'
+        '400':
+          description: NAK - Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: NAK - Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /beckn/v2/catalog/on_publish:
+    post:
+      tags:
+        - Catalog Publish
+      summary: Callback with catalog publish processing results
+      description: |
+        Discovery Service calls back with per-catalog processing results (accepted/rejected, errors, derived stats).
+        The receiver should respond with an **AckResponse**.
+      operationId: onCatalogPublish
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogPublishResponse'
+            examples:
+              results_basic:
+                summary: Example processing results
+                value:
+                  context:
+                    version: "2.0.0"
+                    action: "on_catalog_publish"
+                    timestamp: "2025-09-01T10:31:05+05:30"
+                    message_id: "u-resp-123"
+                    transaction_id: "u-txn-123"
+                    bpp_id: "discovery-indexer.example.com"
+                    bpp_uri: "https://discovery-indexer.example.com"
+                    ttl: "PT30S"
+                  message:
+                    results:
+                      - catalog_id: "catalog-001"
+                        status: "ACCEPTED"
+                        item_count: 42
+                        warnings:
+                          - code: "NON_NORMALIZED_BRAND"
+                            message: "Some brand values were normalized"
+                      - catalog_id: "catalog-002"
+                        status: "REJECTED"
+                        error:
+                          code: "INVALID_ITEM"
+                          message: "Invalid item payload at index 3"
+                          paths: "catalogs[1].items[3]"
       responses:
         '200':
           description: ACK - Callback received
@@ -823,6 +943,110 @@ components:
       required:
         - context
         - message
+
+    CatalogPublishRequest:
+      type: object
+      required: [context, catalogs]
+      properties:
+        context:
+          type: object
+          required: [version, action, timestamp, message_id, transaction_id, bpp_id, bpp_uri, ttl]
+          properties:
+            version:
+              type: string
+              description: Version of the Beckn protocol
+              example: "2.0.0"
+            action:
+              type: string
+              enum: [catalog_publish]
+              description: API endpoint action
+            timestamp:
+              type: string
+              format: date-time
+              description: Time at which the request was generated
+            message_id:
+              type: string
+              description: Message identifier
+            transaction_id:
+              type: string
+              description: Transaction identifier
+            bpp_id:
+              type: string
+              description: Identification of the BPP
+            bpp_uri:
+              type: string
+              format: uri
+              description: BPP endpoint (where /on_catalog_publish callback is exposed)
+            ttl:
+              type: string
+              description: Time to live (ISO 8601 duration format)
+              example: "PT30S"
+        catalogs:
+          type: array
+          description: Array of catalogs containing items
+          items:
+            type: object
+            description: Catalog object containing provider and items information
+          minItems: 1
+      description: |
+        Catalog Publish request envelope.
+        *context.version* MUST indicate the supported protocol version (e.g., "2.0.0").
+
+    CatalogPublishResponse:
+      type: object
+      required: [context, message]
+      properties:
+        context:
+          allOf:
+            - $ref: '#/components/schemas/Context'
+            - type: object
+              properties:
+                action:
+                  type: string
+                  enum: [on_catalog_publish]
+        message:
+          type: object
+          properties:
+            results:
+              type: array
+              description: Per-catalog processing results
+              items:
+                $ref: '#/components/schemas/CatalogProcessingResult'
+
+    CatalogProcessingResult:
+      type: object
+      required: [catalog_id, status]
+      properties:
+        catalog_id:
+          type: string
+          description: The "beckn:id" of the submitted catalog
+        status:
+          type: string
+          enum: [ACCEPTED, REJECTED, PARTIAL]
+          description: Final processing outcome for this catalog
+        item_count:
+          type: integer
+          minimum: 0
+          description: Number of items indexed (when accepted/partial)
+        warnings:
+          type: array
+          description: Non-fatal issues encountered
+          items:
+            $ref: '#/components/schemas/ProcessingNotice'
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+
+    ProcessingNotice:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
 
     Order:
       type: object
