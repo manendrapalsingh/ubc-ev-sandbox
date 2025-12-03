@@ -51,7 +51,8 @@ The **onix-adapter** is a production-ready, plugin-based middleware adapter for 
 
 ### Architecture
 
-- **REST API Communication**: Asynchronous HTTP/REST messaging for real-time interactions
+- **REST API Communication**: Asynchronous HTTP/REST messaging for real-time interactions (available in `sandbox/api` and `onix-adaptor/api`)
+- **Kafka Event Streaming**: High-throughput, distributed event processing (available in `sandbox/kafka` and `onix-adaptor/kafka`)
 - **Redis Caching**: Performance optimization and async state management
 - **Docker Compose**: Easy local development and testing setup
 
@@ -81,30 +82,36 @@ The **onix-adapter** is a production-ready, plugin-based middleware adapter for 
 
 #### Option 1: Complete Sandbox Environment (Recommended for Testing)
 
-Start with the **Complete Sandbox** for a full testing environment with all services:
+Choose the stack that matches the transport layer you want to exercise:
+
+- **Kafka-first flow (full mock ecosystem)** – lives in `sandbox/kafka`
+- **HTTP-only mock services** – lives in `sandbox/api`
+
+**Kafka Sandbox**
 
 ```bash
-# Navigate to the sandbox directory
-cd sandbox
-
-# Start all services (ONIX adapters, mock services, Redis)
-docker-compose up -d
-
-# Verify services are running
-docker-compose ps
-
-# View logs
-docker-compose logs -f
-
-# Stop all services
-docker-compose down
+cd sandbox/kafka
+docker compose up -d          # start all services
+docker compose ps             # verify status
+docker compose logs -f        # tail logs
+# ...
+docker compose down           # stop everything
 ```
 
-For detailed instructions, see: **[Sandbox Guide](./sandbox/README.md)**
+**HTTP Sandbox**
 
-**Available Endpoints:**
-- **ONIX BAP**: `http://localhost:8001/bap/caller/{action}` and `http://localhost:8001/bap/receiver/{action}`
-- **ONIX BPP**: `http://localhost:8002/bpp/caller/{action}` and `http://localhost:8002/bpp/receiver/{action}`
+```bash
+cd sandbox/api
+docker compose up -d
+docker compose ps
+docker compose logs -f
+docker compose down
+```
+
+Each environment mounts configs relative to its folder, so run the commands from within `sandbox/kafka` or `sandbox/api`.  
+**Available Endpoints (Kafka stack defaults):**
+- **ONIX BAP**: `http://localhost:8001/bap/{caller|receiver}/{action}`
+- **ONIX BPP**: `http://localhost:8002/bpp/{caller|receiver}/{action}`
 - **Mock Registry**: `http://localhost:3030`
 - **Mock CDS**: `http://localhost:8082`
 - **Mock BAP**: `http://localhost:9001`
@@ -112,42 +119,26 @@ For detailed instructions, see: **[Sandbox Guide](./sandbox/README.md)**
 
 #### Option 2: Standalone ONIX Adapters
 
-For deploying only the ONIX adapters without mock services:
+Need only the ONIX adapters? Use the compose files under `onix-adaptor/` directly.
 
-**BAP Adapter:**
+**Kafka Plugins (connect to real Kafka clusters)**
 ```bash
-# Navigate to the onix-adaptor directory
-cd onix-adaptor
-
-# Start BAP services
-docker-compose -f docker-compose-onix-bap-plugin.yml up -d
-
-# Verify services are running
-docker-compose -f docker-compose-onix-bap-plugin.yml ps
-
-# View logs
-docker-compose -f docker-compose-onix-bap-plugin.yml logs -f onix-bap-plugin
-
-# Stop services
-docker-compose -f docker-compose-onix-bap-plugin.yml down
+cd onix-adaptor/kafka
+docker compose -f docker-compose-onix-bap-kafka-plugin.yml up -d
+docker compose -f docker-compose-onix-bpp-kafka-plugin.yml up -d
+# ...
+docker compose -f docker-compose-onix-bap-kafka-plugin.yml down
+docker compose -f docker-compose-onix-bpp-kafka-plugin.yml down
 ```
 
-**BPP Adapter:**
+**HTTP/API Plugins (REST ↔︎ REST)**
 ```bash
-# Navigate to the onix-adaptor directory
-cd onix-adaptor
-
-# Start BPP services
-docker-compose -f docker-compose-onix-bpp-plugin.yml up -d
-
-# Verify services are running
-docker-compose -f docker-compose-onix-bpp-plugin.yml ps
-
-# View logs
-docker-compose -f docker-compose-onix-bpp-plugin.yml logs -f onix-bpp-plugin
-
-# Stop services
-docker-compose -f docker-compose-onix-bpp-plugin.yml down
+cd onix-adaptor/api
+docker compose -f docker-compose-onix-bap-plugin.yml up -d
+docker compose -f docker-compose-onix-bpp-plugin.yml up -d
+# ...
+docker compose -f docker-compose-onix-bap-plugin.yml down
+docker compose -f docker-compose-onix-bpp-plugin.yml down
 ```
 
 For detailed instructions, see: **[ONIX Adapter Integration Guide](./onix-adaptor/README.md)**
@@ -213,11 +204,13 @@ Phase 2+: Direct BPP Communication
    - Registry (Subscriber lookup)
 
 
+
 ## Documentation
 
 ### Integration Guides
 
-- **[Sandbox Guide](./sandbox/README.md)**: Complete Docker sandbox with all services (ONIX adapters, mock services, Redis)
+- **[HTTP/REST Sandbox Guide](./sandbox/api/README.md)**: Complete Docker sandbox with HTTP/REST communication (ONIX adapters, mock services, Redis)
+- **[Kafka Sandbox Guide](./sandbox/kafka/README.md)**: Complete Docker sandbox with Kafka event streaming (ONIX adapters, mock services, Redis, Kafka)
 - **[ONIX Adapter Integration Guide](./onix-adaptor/README.md)**: Standalone Docker-based ONIX adapter deployment
 
 ### API Documentation

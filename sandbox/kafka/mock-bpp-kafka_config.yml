@@ -1,0 +1,37 @@
+# Mock BPP Kafka Service Configuration
+# Service runs in queue-only mode - consumes messages from Kafka topics
+# No external HTTP ports exposed - all communication via Kafka
+kafka:
+  brokers:
+    - kafka:9092
+  # Consumer group ID
+  group_id: "mock-bpp-kafka-group"
+
+server:
+  # Port for internal health check endpoint only (not exposed externally)
+  # Used by Docker healthcheck - service runs in queue-only mode
+  port: ":9004"
+
+defaults:
+  # Beckn protocol version
+  version: "1.0.0"
+  # Country code (ISO 3166-1 alpha-3)
+  country_code: "IND"
+  # City code (Beckn city code format)
+  city_code: "std:080"
+  # Default BPP identification for callback payloads
+  bpp_id: "mock-bpp-kafka"
+  bpp_uri: "https://mock-bpp-kafka.local"
+
+callbacks:
+  action_topics:
+    discover: "bpp.on_discover"
+    select: "bpp.on_select"
+    init: "bpp.on_init"
+    confirm: "bpp.on_confirm"
+    status: "bpp.on_status"
+    track: "bpp.on_track"
+    cancel: "bpp.on_cancel"
+    update: "bpp.on_update"
+    rating: "bpp.on_rating"
+    support: "bpp.on_support"

@@ -42,11 +42,11 @@ services:
       - "8001:8001"
     volumes:
       # Mount config directory (writable for symlink creation, but original files won't be modified)
-      - ../onix-adaptor/config/onix-bap:/app/config/onix-bap
+      - ../../onix-adaptor/api/config/onix-bap:/app/config/onix-bap
       # Mount adapter.yaml directly to expected location
-      - ../onix-adaptor/config/onix-bap/adapter.yaml:/app/config/adapter.yaml:ro
+      - ../../onix-adaptor/api/config/onix-bap/adapter.yaml:/app/config/adapter.yaml:ro
       # Mount schema directory (read-only)
-      - ../schemas:/app/schemas:ro
+      - ../../schemas:/app/schemas:ro
     environment:
       - CONFIG_FILE=/app/config/adapter.yaml
     restart: unless-stopped
@@ -67,11 +67,11 @@ services:
       - "8002:8002"
     volumes:
       # Mount config directory (writable for symlink creation, but original files won't be modified)
-      - ../onix-adaptor/config/onix-bpp:/app/config/onix-bpp
+      - ../../onix-adaptor/api/config/onix-bpp:/app/config/onix-bpp
       # Mount adapter.yaml directly to expected location
-      - ../onix-adaptor/config/onix-bpp/adapter.yaml:/app/config/adapter.yaml:ro
+      - ../../onix-adaptor/api/config/onix-bpp/adapter.yaml:/app/config/adapter.yaml:ro
       # Mount schema directory (read-only)
-      - ../schemas:/app/schemas:ro
+      - ../../schemas:/app/schemas:ro
     environment:
       - CONFIG_FILE=/app/config/adapter.yaml
     restart: unless-stopped

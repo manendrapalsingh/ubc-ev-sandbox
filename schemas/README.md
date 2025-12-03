@@ -28,7 +28,9 @@ schemas/
         ├── on_track.json         # Response to track request
         ├── on_status.json        # Status update callback schema
         ├── on_support.json       # Response to support request
-        └── on_rating.json        # Response to rating request
+        ├── on_rating.json        # Response to rating request
+        ├── catalog_publish.json   # Publish catalog to discovery indexer
+        └── on_catalog_publish.json # Response to catalog publish request
 ```
 
 ## Schema Version
@@ -83,6 +85,8 @@ These schemas define responses/callbacks sent by the seller platform (charging p
 | `on_status.json` | `on_status` | Status update callbacks (push notifications) |
 | `on_support.json` | `on_support` | Response to support queries |
 | `on_rating.json` | `on_rating` | Acknowledgment of rating submission |
+| `catalog_publish.json` | `catalog_publish` | Publish catalog to discovery indexer |
+| `on_catalog_publish.json` | `on_catalog_publish` | Response to catalog publish request from discovery indexer |
 
 ### Combined Schema
 

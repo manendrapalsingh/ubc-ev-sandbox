@@ -1,0 +1,424 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "catalog_publish",
+  "type": "object",
+  "properties": {
+    "context": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the Beckn protocol"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "catalog_publish"
+          ],
+          "description": "API endpoint to be called"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the request was generated"
+        },
+        "message_id": {
+          "type": "string",
+          "description": "Message identifier"
+        },
+        "transaction_id": {
+          "type": "string",
+          "description": "Transaction identifier"
+        },
+        "bpp_id": {
+          "type": "string",
+          "description": "Identification of the BPP"
+        },
+        "bpp_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "BPP endpoint"
+        },
+        "ttl": {
+          "type": "string",
+          "description": "Time to live (ISO 8601 duration format)"
+        }
+      },
+      "required": [
+        "version",
+        "action",
+        "timestamp",
+        "message_id",
+        "transaction_id",
+        "bpp_id",
+        "bpp_uri"
+      ]
+    },
+    "catalogs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "@context": {
+            "type": "string",
+            "format": "uri"
+          },
+          "@type": {
+            "type": "string",
+            "enum": [
+              "beckn:Catalog"
+            ]
+          },
+          "beckn:id": {
+            "type": "string"
+          },
+          "beckn:descriptor": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string"
+              },
+              "schema:name": {
+                "type": "string"
+              },
+              "beckn:shortDesc": {
+                "type": "string"
+              },
+              "beckn:longDesc": {
+                "type": "string"
+              }
+            }
+          },
+          "beckn:validity": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "type": "string"
+              },
+              "schema:startDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "schema:endDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "beckn:items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "@context": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "@type": {
+                  "type": "string",
+                  "enum": [
+                    "beckn:Item"
+                  ]
+                },
+                "beckn:id": {
+                  "type": "string"
+                },
+                "beckn:descriptor": {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "string"
+                    },
+                    "schema:name": {
+                      "type": "string"
+                    },
+                    "beckn:shortDesc": {
+                      "type": "string"
+                    },
+                    "beckn:longDesc": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "beckn:category": {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "string"
+                    },
+                    "schema:codeValue": {
+                      "type": "string"
+                    },
+                    "schema:name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "beckn:availableAt": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "geo": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "Point"
+                            ]
+                          },
+                          "coordinates": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            },
+                            "minItems": 2,
+                            "maxItems": 2
+                          }
+                        }
+                      },
+                      "address": {
+                        "type": "object",
+                        "properties": {
+                          "streetAddress": {
+                            "type": "string"
+                          },
+                          "addressLocality": {
+                            "type": "string"
+                          },
+                          "addressRegion": {
+                            "type": "string"
+                          },
+                          "postalCode": {
+                            "type": "string"
+                          },
+                          "addressCountry": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "beckn:availabilityWindow": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "@type": {
+                          "type": "string"
+                        },
+                        "schema:startTime": {
+                          "type": "string"
+                        },
+                        "schema:endTime": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "type": "string"
+                          },
+                          "schema:startTime": {
+                            "type": "string"
+                          },
+                          "schema:endTime": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "beckn:rateable": {
+                  "type": "boolean"
+                },
+                "beckn:rating": {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "string"
+                    },
+                    "beckn:ratingValue": {
+                      "type": "number"
+                    },
+                    "beckn:ratingCount": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "beckn:isActive": {
+                  "type": "boolean"
+                },
+                "beckn:networkId": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "beckn:provider": {
+                  "type": "object",
+                  "properties": {
+                    "beckn:id": {
+                      "type": "string"
+                    },
+                    "beckn:descriptor": {
+                      "type": "object",
+                      "properties": {
+                        "@type": {
+                          "type": "string"
+                        },
+                        "schema:name": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "beckn:itemAttributes": {
+                  "type": "object",
+                  "description": "EV Charging Service specific attributes"
+                }
+              },
+              "required": [
+                "@type",
+                "beckn:id"
+              ]
+            }
+          },
+          "beckn:offers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "@context": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "@type": {
+                  "type": "string",
+                  "enum": [
+                    "beckn:Offer"
+                  ]
+                },
+                "beckn:id": {
+                  "type": "string"
+                },
+                "beckn:descriptor": {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "string"
+                    },
+                    "schema:name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "beckn:items": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "beckn:price": {
+                  "type": "object",
+                  "properties": {
+                    "currency": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "applicableQuantity": {
+                      "type": "object",
+                      "properties": {
+                        "unitText": {
+                          "type": "string"
+                        },
+                        "unitCode": {
+                          "type": "string"
+                        },
+                        "unitQuantity": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "currency",
+                    "value"
+                  ]
+                },
+                "beckn:validity": {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "type": "string"
+                    },
+                    "schema:startDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "schema:endDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                },
+                "beckn:acceptedPaymentMethod": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "beckn:offerAttributes": {
+                  "type": "object"
+                },
+                "beckn:provider": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "@type",
+                "beckn:id"
+              ]
+            }
+          }
+        },
+        "required": [
+          "@type",
+          "beckn:id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "context",
+    "catalogs"
+  ],
+  "additionalProperties": false
+}
+

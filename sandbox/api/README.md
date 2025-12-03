@@ -61,11 +61,11 @@ This setup creates a fully functional sandbox environment for testing and develo
 
 Each service has its own configuration file with a service name prefix. This section explains what each config file is used for:
 
-### 1. ONIX BAP Configuration (`docker/api/monolithic/config/onix-bap/`)
+### 1. ONIX BAP Configuration (`onix-adaptor/api/config/onix-bap/`)
 
 **Purpose**: Complete adapter configuration for the ONIX BAP plugin.
 
-**Usage**: The actual configuration files are mounted from `../../../../docker/api/monolithic/config/onix-bap/`. This directory contains:
+**Usage**: The actual configuration files are mounted from `../../onix-adaptor/api/config/onix-bap/`. This directory contains:
 
 - **`adapter.yaml`**: Main adapter configuration file
 - **`bap_caller_routing.yaml`**: Routing rules for outgoing requests from BAP application
@@ -97,13 +97,13 @@ Each service has its own configuration file with a service name prefix. This sec
 - **`bap_receiver_routing.yaml`**: Defines routing rules for incoming callbacks:
   - All callbacks (`on_discover`, `on_select`, `on_init`, etc.) → Routes to mock-bap backend (`http://mock-bap:9001`)
 
-**Note**: The reference files `onix-bap_config.yml` in this directory are informational only. The actual configs are in `docker/api/monolithic/config/onix-bap/`.
+**Note**: The reference files `onix-bap_config.yml` in this directory are informational only. The actual configs are in `onix-adaptor/api/config/onix-bap/`.
 
-### 2. ONIX BPP Configuration (`docker/api/monolithic/config/onix-bpp/`)
+### 2. ONIX BPP Configuration (`onix-adaptor/api/config/onix-bpp/`)
 
 **Purpose**: Complete adapter configuration for the ONIX BPP plugin.
 
-**Usage**: The actual configuration files are mounted from `../../../../docker/api/monolithic/config/onix-bpp/`. This directory contains:
+**Usage**: The actual configuration files are mounted from `../../onix-adaptor/api/config/onix-bpp/`. This directory contains:
 
 - **`adapter.yaml`**: Main adapter configuration file
 - **`bpp_caller_routing.yaml`**: Routing rules for outgoing responses from BPP
@@ -131,7 +131,7 @@ Each service has its own configuration file with a service name prefix. This sec
   - Phase 1: `discover` from CDS → Routes to mock-bpp backend (`http://mock-bpp:9002`)
   - Phase 2+: Other requests (`select`, `init`, `confirm`, etc.) from BAP → Routes to mock-bpp backend
 
-**Note**: The reference files `onix-bpp_config.yml` in this directory are informational only. The actual configs are in `docker/api/monolithic/config/onix-bpp/`.
+**Note**: The reference files `onix-bpp_config.yml` in this directory are informational only. The actual configs are in `onix-adaptor/api/config/onix-bpp/`.
 
 ### 3. `mock-registry_config.yml`
 
@@ -244,7 +244,7 @@ Each service has its own configuration file with a service name prefix. This sec
 
 ```bash
 # Navigate to this directory
-cd sandbox/docker/api/monolithic
+cd sandbox/api
 
 # Start all services
 docker-compose up -d
@@ -351,11 +351,11 @@ ports:
 
 To change how requests/responses are routed through the ONIX adapters, edit the routing configuration files:
 
-1. **For BAP routing changes**, edit `docker/api/monolithic/config/onix-bap/`:
+1. **For BAP routing changes**, edit `onix-adaptor/api/config/onix-bap/`:
    - `bap_caller_routing.yaml` - Modify outgoing request routing
    - `bap_receiver_routing.yaml` - Modify incoming callback routing
 
-2. **For BPP routing changes**, edit `docker/api/monolithic/config/onix-bpp/`:
+2. **For BPP routing changes**, edit `onix-adaptor/api/config/onix-bpp/`:
    - `bpp_caller_routing.yaml` - Modify outgoing response routing
    - `bpp_receiver_routing.yaml` - Modify incoming request routing
 
@@ -439,7 +439,7 @@ To change how requests/responses are routed through the ONIX adapters, edit the 
 ## File Structure
 
 ```
-sandbox/docker/api/monolithic/
+sandbox/api/
 ├── docker-compose.yml              # Unified compose file for all services
 ├── README.md                        # This file
 ├── onix-bap_config.yml              # Reference config for ONIX BAP (informational)
@@ -450,7 +450,7 @@ sandbox/docker/api/monolithic/
 └── mock-bpp_config.yml              # Mock BPP configuration
 
 # Actual ONIX adapter configurations (mounted from parent directory)
-docker/api/monolithic/config/
+onix-adaptor/api/config/
 ├── onix-bap/
 │   ├── adapter.yaml                 # Main BAP adapter configuration
 │   ├── bap_caller_routing.yaml      # BAP caller routing rules
@@ -465,11 +465,11 @@ docker/api/monolithic/config/
 
 - [ONIX Protocol Documentation](https://github.com/beckn/onix)
 - [BAP/BPP Specification](https://github.com/beckn/protocol-specifications)
-- [Main API README](../../../../../docker/api/monolithic/README.md) - Detailed ONIX adapter documentation
+- [Main API README](../../onix-adaptor/api/README.md) - Detailed ONIX adapter documentation
 
 ## Notes
 
-- The `onix-bap_config.yml` and `onix-bpp_config.yml` files are **reference copies** for documentation purposes. The actual configurations used by the containers are mounted from `../../../../docker/api/monolithic/config/onix-{bap|bpp}/`.
+- The `onix-bap_config.yml` and `onix-bpp_config.yml` files are **reference copies** for documentation purposes. The actual configurations used by the containers are mounted from `../../onix-adaptor/api/config/onix-{bap|bpp}/`.
 - The ONIX adapter configuration directory structure includes:
   - `adapter.yaml`: Main adapter configuration
   - `{bap|bpp}_caller_routing.yaml`: Routing rules for outgoing requests/responses

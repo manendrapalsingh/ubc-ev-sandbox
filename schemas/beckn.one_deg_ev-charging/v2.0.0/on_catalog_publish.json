@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "on_catalog_publish",
+  "type": "object",
+  "properties": {
+    "context": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the Beckn protocol"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "on_catalog_publish"
+          ],
+          "description": "API endpoint callback"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the response was generated"
+        },
+        "message_id": {
+          "type": "string",
+          "description": "Message identifier"
+        },
+        "transaction_id": {
+          "type": "string",
+          "description": "Transaction identifier"
+        },
+        "bpp_id": {
+          "type": "string",
+          "description": "Identification of the BPP (discovery indexer)"
+        },
+        "bpp_uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "BPP endpoint (discovery indexer endpoint)"
+        },
+        "ttl": {
+          "type": "string",
+          "description": "Time to live (ISO 8601 duration format)"
+        }
+      },
+      "required": [
+        "version",
+        "action",
+        "timestamp",
+        "message_id",
+        "transaction_id",
+        "bpp_id",
+        "bpp_uri"
+      ]
+    },
+    "message": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "catalog_id": {
+                "type": "string",
+                "description": "Identifier of the catalog that was published"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "ACCEPTED",
+                  "REJECTED",
+                  "PARTIALLY_ACCEPTED"
+                ],
+                "description": "Status of the catalog publication"
+              },
+              "item_count": {
+                "type": "number",
+                "description": "Number of items in the catalog"
+              },
+              "warnings": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Warning code"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Warning message"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ]
+                }
+              },
+              "error": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Error code"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Error message"
+                  },
+                  "paths": {
+                    "type": "string",
+                    "description": "JSONPath to the location of the error in the catalog"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message"
+                ]
+              }
+            },
+            "required": [
+              "catalog_id",
+              "status"
+            ]
+          }
+        }
+      },
+      "required": [
+        "results"
+      ]
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "context",
+    "message"
+  ],
+  "additionalProperties": false
+}
+
