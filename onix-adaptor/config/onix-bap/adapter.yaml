@@ -130,13 +130,5 @@ modules:
         - addRoute
         - sign
 
-plugins:
-  - registry
-  - simplekeymanager
-  - cache
-  - schemavalidator
-  - signvalidator
-  - router
-  - signer
-  - reqpreprocessor
+plugins: {}
 
