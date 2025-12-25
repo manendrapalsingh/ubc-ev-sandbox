@@ -35,7 +35,7 @@ services:
 
   # Onix BAP Plugin
   onix-bap-plugin:
-    image: manendrapalsingh/onix-adapter:latest
+    image: manendrapalsingh/onix-adapter:v0.8.0
     pull_policy: always
     container_name: onix-bap-plugin
     ports:
@@ -60,7 +60,7 @@ services:
 
   # Onix BPP Plugin
   onix-bpp-plugin:
-    image: manendrapalsingh/onix-adapter:latest
+    image: manendrapalsingh/onix-adapter:v0.8.0
     pull_policy: always
     container_name: onix-bpp-plugin
     ports:
