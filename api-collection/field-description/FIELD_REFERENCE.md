@@ -32,8 +32,6 @@ Fields that appear in the `context` object of every API call.
 | `context.version` | Version | String | ✅ | Beckn protocol version | `2.0.0` | All APIs |
 | `context.action` | Action | String | ✅ | The API action being performed | `discover`, `on_discover`, `select`, etc. | All APIs |
 | `context.domain` | Domain | String | ✅ | Domain/use case identifier | `beckn.one:deg:ev-charging:` | All APIs |
-| `context.location.country.code` | Country Code | String | ✅ | ISO 3166-1 alpha-3 country code | `IND` | All APIs |
-| `context.location.city.code` | City Code | String | ✅ | City code with standard prefix | `std:080` | All APIs |
 | `context.timestamp` | Timestamp | DateTime | ✅ | Request/response timestamp | `2024-01-15T10:30:00Z` | All APIs |
 | `context.transaction_id` | Transaction ID | UUID | ✅ | Unique identifier for the transaction | `2b4d69aa-22e4-4c78-9f56-5a7b9e2b2002` | All APIs |
 | `context.message_id` | Message ID | UUID | ✅ | Unique identifier for each message | `a1eabf26-29f5-4a01-9d4e-4c5c9d1a3d02` | All APIs |
@@ -49,6 +47,7 @@ Fields that appear in the `context` object of every API call.
 - `message_id` is unique for each request/response
 - `ttl` uses ISO 8601 duration format
 - `bpp_id` and `bpp_uri` only present in response APIs
+- **Location information is NOT part of the context**. Location data for charging stations is available in the message body (e.g., `beckn:availableAt` in catalog items, `deliveryAttributes.location` in fulfillment)
 
 ---
 

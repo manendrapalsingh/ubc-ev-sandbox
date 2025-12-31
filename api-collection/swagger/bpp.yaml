@@ -287,45 +287,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
-  /on_status:
-    post:
-      tags:
-        - Tracking Callbacks
-      summary: On Status callback
-      description: |
-        Callback endpoint that sends order status updates.
-        This is sent asynchronously by BPP to BAP receiver for status notifications.
-      operationId: onStatus
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OnStatusRequest'
-            examples:
-              sample:
-                summary: On status callback (charging error)
-                externalValue: ../tmp/v2/13_on_status/time-based-ev-charging-slot-on-status.json
-      responses:
-        '200':
-          description: ACK - Callback received
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AckResponse'
-        '400':
-          description: NAK - Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: NAK - Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
   /on_cancel:
     post:
       tags:
@@ -423,6 +384,45 @@ paths:
               sample:
                 summary: On support callback payload
                 externalValue: ../tmp/v2/18_on_support/time-based-ev-charging-slot-on-support.json
+      responses:
+        '200':
+          description: ACK - Callback received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AckResponse'
+        '400':
+          description: NAK - Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: NAK - Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /on_status:
+    post:
+      tags:
+        - Tracking Callbacks
+      summary: On Status callback
+      description: |
+        Callback endpoint that sends order status updates.
+        This is sent asynchronously by BPP to BAP receiver for status notifications.
+      operationId: onStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnStatusRequest'
+            examples:
+              sample:
+                summary: On status callback (charging error)
+                externalValue: ../tmp/v2/13_on_status/time-based-ev-charging-slot-on-status.json
       responses:
         '200':
           description: ACK - Callback received
@@ -622,8 +622,6 @@ components:
           type: string
           description: Identifier of the domain
           example: "beckn.one:deg:ev-charging"
-        location:
-          $ref: '#/components/schemas/Location'
         bap_id:
           type: string
           description: Identification of the BAP
@@ -662,7 +660,6 @@ components:
         - version
         - action
         - domain
-        - location
         - bap_id
         - bap_uri
         - bpp_id
@@ -670,31 +667,6 @@ components:
         - transaction_id
         - message_id
         - timestamp
-
-    Location:
-      type: object
-      properties:
-        country:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Country code as per ISO 3166-1 alpha-3 standard
-              example: "IND"
-          required:
-            - code
-        city:
-          type: object
-          properties:
-            code:
-              type: string
-              description: City code
-              example: "std:080"
-          required:
-            - code
-      required:
-        - country
-        - city
 
     OnDiscoverRequest:
       type: object
