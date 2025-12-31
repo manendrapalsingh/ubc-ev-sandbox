@@ -1,4 +1,52 @@
 {
+  "discover_request_spatial": {
+    "message": {
+      "spatial": [
+        {
+          "op": "s_dwithin",
+          "targets": "$['beckn:itemAttributes.chargingStation.serviceLocation.geo']",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              77.5946,
+              12.9716
+            ]
+          },
+          "distanceMeters": 10000
+        }
+      ]
+    }
+  },
+  "discover_request_filters": {
+    "message": {
+      "filters": {
+        "type": "jsonpath",
+        "expression": "$[?(@.beckn:itemAttributes.evseId == 'IN*ECO*BTM*01*CCS2*A')]"
+      }
+    }
+  },
+  "discover_request_spatial_and_filters": {
+    "message": {
+      "spatial": [
+        {
+          "op": "s_dwithin",
+          "targets": "$['beckn:itemAttributes.chargingStation.serviceLocation.geo']",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              77.59,
+              12.94
+            ]
+          },
+          "distanceMeters": 10000
+        }
+      ],
+      "filters": {
+        "type": "jsonpath",
+        "expression": "$[?(@.beckn:itemAttributes.connectorType == 'CCS2' && @.beckn:itemAttributes.maxPowerKW >= 50)]"
+      }
+    }
+  },
   "discover": {
     "message": {
       "catalogs": [
@@ -11,6 +59,8 @@
             "schema:name": "EV Charging Services Network",
             "beckn:shortDesc": "Comprehensive network of fast charging stations across Bengaluru"
           },
+          "beckn:bppId": "bpp.ev-network.example.com",
+          "beckn:bppUri": "https://bpp.ev-network.example.com/bpp",
           "beckn:validity": {
             "@type": "beckn:TimePeriod",
             "schema:startDate": "2024-10-01T00:00:00Z",
@@ -20,7 +70,7 @@
             {
               "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
               "@type": "beckn:Item",
-              "beckn:id": "ev-charger-ccs2-001",
+              "beckn:id": "IND*ecopower-charging*cs-01*IN*ECO*BTM*01*CCS2*A*CCS2-A",
               "beckn:descriptor": {
                 "@type": "beckn:Descriptor",
                 "schema:name": "DC Fast Charger - CCS2 (60kW)",
@@ -32,25 +82,6 @@
                 "schema:codeValue": "ev-charging",
                 "schema:name": "EV Charging"
               },
-              "beckn:availableAt": [
-                {
-                  "@type": "beckn:Location",
-                  "geo": {
-                    "type": "Point",
-                    "coordinates": [
-                      77.5946,
-                      12.9716
-                    ]
-                  },
-                  "address": {
-                    "streetAddress": "EcoPower BTM Hub, 100 Ft Rd",
-                    "addressLocality": "Bengaluru",
-                    "addressRegion": "Karnataka",
-                    "postalCode": "560076",
-                    "addressCountry": "IN"
-                  }
-                }
-              ],
               "beckn:availabilityWindow": [
                 {
                   "@type": "beckn:TimePeriod",
@@ -65,9 +96,6 @@
                 "beckn:ratingCount": 128
               },
               "beckn:isActive": true,
-              "beckn:networkId": [
-                "bap.net/ev-charging"
-              ],
               "beckn:provider": {
                 "beckn:id": "ecopower-charging",
                 "beckn:descriptor": {
@@ -76,50 +104,49 @@
                 }
               },
               "beckn:itemAttributes": {
-                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingService/v1/context.jsonld",
+                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingService/v1/context.jsonld",
                 "@type": "ChargingService",
                 "connectorType": "CCS2",
                 "maxPowerKW": 60,
                 "minPowerKW": 5,
-                "socketCount": 2,
                 "reservationSupported": true,
-                "serviceLocation": {
-                  "@type": "beckn:Location",
-                  "geo": {
-                    "type": "Point",
-                    "coordinates": [
-                      77.5946,
-                      12.9716
-                    ]
-                  },
-                  "address": {
-                    "streetAddress": "EcoPower BTM Hub, 100 Ft Rd",
-                    "addressLocality": "Bengaluru",
-                    "addressRegion": "Karnataka",
-                    "postalCode": "560076",
-                    "addressCountry": "IN"
+                "chargingStation": {
+                  "id": "IN-ECO-BTM-STATION-01",
+                  "serviceLocation": {
+                    "@type": "beckn:Location",
+                    "geo": {
+                      "type": "Point",
+                      "coordinates": [
+                        77.5946,
+                        12.9716
+                      ]
+                    },
+                    "address": {
+                      "streetAddress": "EcoPower BTM Hub, 100 Ft Rd",
+                      "addressLocality": "Bengaluru",
+                      "addressRegion": "Karnataka",
+                      "postalCode": "560076",
+                      "addressCountry": "IN"
+                    }
                   }
                 },
                 "amenityFeature": [
-                  "Restaurant",
-                  "Restroom",
-                  "Wi-Fi"
+                  "RESTAURANT",
+                  "RESTROOM",
+                  "WI-FI"
                 ],
-                "ocppId": "IN-ECO-BTM-01",
                 "evseId": "IN*ECO*BTM*01*CCS2*A",
-                "roamingNetwork": "GreenRoam",
                 "parkingType": "Mall",
-                "connectorId": "CCS2-A",
                 "powerType": "DC",
                 "connectorFormat": "CABLE",
                 "chargingSpeed": "FAST",
-                "stationStatus": "Available"
+                "vehicleType": "4-WHEELER"
               }
             },
             {
               "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
               "@type": "beckn:Item",
-              "beckn:id": "ev-charger-ccs2-002",
+              "beckn:id": "IND*greencharge-koramangala*cs-02*IN*GC*KOR*01*CCS2*A*CCS2-B",
               "beckn:descriptor": {
                 "@type": "beckn:Descriptor",
                 "schema:name": "DC Fast Charger - CCS2 (120kW)",
@@ -131,25 +158,6 @@
                 "schema:codeValue": "ev-charging",
                 "schema:name": "EV Charging"
               },
-              "beckn:availableAt": [
-                {
-                  "@type": "beckn:Location",
-                  "geo": {
-                    "type": "Point",
-                    "coordinates": [
-                      77.6104,
-                      12.9153
-                    ]
-                  },
-                  "address": {
-                    "streetAddress": "GreenCharge Koramangala, 80 Ft Rd",
-                    "addressLocality": "Bengaluru",
-                    "addressRegion": "Karnataka",
-                    "postalCode": "560034",
-                    "addressCountry": "IN"
-                  }
-                }
-              ],
               "beckn:availabilityWindow": [
                 {
                   "@type": "beckn:TimePeriod",
@@ -164,9 +172,6 @@
                 "beckn:ratingCount": 89
               },
               "beckn:isActive": true,
-              "beckn:networkId": [
-                "bap.net/ev-charging"
-              ],
               "beckn:provider": {
                 "beckn:id": "greencharge-koramangala",
                 "beckn:descriptor": {
@@ -175,51 +180,50 @@
                 }
               },
               "beckn:itemAttributes": {
-                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingService/v1/context.jsonld",
+                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingService/v1/context.jsonld",
                 "@type": "ChargingService",
                 "connectorType": "CCS2",
                 "maxPowerKW": 120,
                 "minPowerKW": 10,
-                "socketCount": 1,
                 "reservationSupported": true,
-                "serviceLocation": {
-                  "@type": "beckn:Location",
-                  "geo": {
-                    "type": "Point",
-                    "coordinates": [
-                      77.6104,
-                      12.9153
-                    ]
-                  },
-                  "address": {
-                    "streetAddress": "GreenCharge Koramangala, 80 Ft Rd",
-                    "addressLocality": "Bengaluru",
-                    "addressRegion": "Karnataka",
-                    "postalCode": "560034",
-                    "addressCountry": "IN"
+                "chargingStation": {
+                  "id": "cs-02",
+                  "serviceLocation": {
+                    "@type": "beckn:Location",
+                    "geo": {
+                      "type": "Point",
+                      "coordinates": [
+                        77.6104,
+                        12.9153
+                      ]
+                    },
+                    "address": {
+                      "streetAddress": "GreenCharge Koramangala, 80 Ft Rd",
+                      "addressLocality": "Bengaluru",
+                      "addressRegion": "Karnataka",
+                      "postalCode": "560034",
+                      "addressCountry": "IN"
+                    }
                   }
                 },
                 "amenityFeature": [
-                  "Restaurant",
-                  "Restroom",
-                  "Wi-Fi",
-                  "Parking"
+                  "RESTAURANT",
+                  "RESTROOM",
+                  "WI-FI",
+                  "PARKING"
                 ],
-                "ocppId": "IN-GC-KOR-01",
                 "evseId": "IN*GC*KOR*01*CCS2*A",
-                "roamingNetwork": "GreenRoam",
                 "parkingType": "OffStreet",
-                "connectorId": "CCS2-B",
                 "powerType": "DC",
                 "connectorFormat": "CABLE",
                 "chargingSpeed": "ULTRAFAST",
-                "stationStatus": "Available"
+                "vehicleType": "3-WHEELER"
               }
             },
             {
               "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
               "@type": "beckn:Item",
-              "beckn:id": "ev-charger-type2-001",
+              "beckn:id": "IND*powergrid-indiranagar*cs-03*IN*PG*IND*01*TYPE2*A*TYPE2-A",
               "beckn:descriptor": {
                 "@type": "beckn:Descriptor",
                 "schema:name": "AC Fast Charger - Type 2 (22kW)",
@@ -231,25 +235,6 @@
                 "schema:codeValue": "ev-charging",
                 "schema:name": "EV Charging"
               },
-              "beckn:availableAt": [
-                {
-                  "@type": "beckn:Location",
-                  "geo": {
-                    "type": "Point",
-                    "coordinates": [
-                      77.6254,
-                      12.9716
-                    ]
-                  },
-                  "address": {
-                    "streetAddress": "PowerGrid Indiranagar, 100 Ft Rd",
-                    "addressLocality": "Bengaluru",
-                    "addressRegion": "Karnataka",
-                    "postalCode": "560008",
-                    "addressCountry": "IN"
-                  }
-                }
-              ],
               "beckn:availabilityWindow": [
                 {
                   "@type": "beckn:TimePeriod",
@@ -264,9 +249,6 @@
                 "beckn:ratingCount": 156
               },
               "beckn:isActive": true,
-              "beckn:networkId": [
-                "bap.net/ev-charging"
-              ],
               "beckn:provider": {
                 "beckn:id": "powergrid-indiranagar",
                 "beckn:descriptor": {
@@ -275,44 +257,43 @@
                 }
               },
               "beckn:itemAttributes": {
-                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingService/v1/context.jsonld",
+                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingService/v1/context.jsonld",
                 "@type": "ChargingService",
                 "connectorType": "Type2",
                 "maxPowerKW": 22,
                 "minPowerKW": 3,
-                "socketCount": 4,
                 "reservationSupported": true,
-                "serviceLocation": {
-                  "@type": "beckn:Location",
-                  "geo": {
-                    "type": "Point",
-                    "coordinates": [
-                      77.6254,
-                      12.9716
-                    ]
-                  },
-                  "address": {
-                    "streetAddress": "PowerGrid Indiranagar, 100 Ft Rd",
-                    "addressLocality": "Bengaluru",
-                    "addressRegion": "Karnataka",
-                    "postalCode": "560008",
-                    "addressCountry": "IN"
+                "chargingStation": {
+                  "id": "cs-03",
+                  "serviceLocation": {
+                    "@type": "beckn:Location",
+                    "geo": {
+                      "type": "Point",
+                      "coordinates": [
+                        77.6254,
+                        12.9716
+                      ]
+                    },
+                    "address": {
+                      "streetAddress": "PowerGrid Indiranagar, 100 Ft Rd",
+                      "addressLocality": "Bengaluru",
+                      "addressRegion": "Karnataka",
+                      "postalCode": "560008",
+                      "addressCountry": "IN"
+                    }
                   }
                 },
                 "amenityFeature": [
-                  "Restroom",
-                  "Wi-Fi",
-                  "Parking"
+                  "RESTROOM",
+                  "WI-FI",
+                  "PARKING"
                 ],
-                "ocppId": "IN-PG-IND-01",
                 "evseId": "IN*PG*IND*01*TYPE2*A",
-                "roamingNetwork": "GreenRoam",
                 "parkingType": "Office",
-                "connectorId": "TYPE2-A",
                 "powerType": "AC_3_PHASE",
                 "connectorFormat": "SOCKET",
                 "chargingSpeed": "NORMAL",
-                "stationStatus": "Available"
+                "vehicleType": "4-WHEELER"
               }
             }
           ],
@@ -326,11 +307,11 @@
                 "schema:name": "Per-kWh Tariff - CCS2 60kW"
               },
               "beckn:items": [
-                "ev-charger-ccs2-001"
+                "IND*ecopower-charging*cs-01*IN*ECO*BTM*01*CCS2*A*CCS2-A"
               ],
               "beckn:price": {
                 "currency": "INR",
-                "value": 18.0,
+                "value": 45.0,
                 "applicableQuantity": {
                   "unitText": "Kilowatt Hour",
                   "unitCode": "KWH",
@@ -344,17 +325,22 @@
               },
               "beckn:acceptedPaymentMethod": [
                 "UPI",
-                "Card",
-                "Wallet"
+                "CREDIT_CARD",
+                "WALLET"
               ],
               "beckn:offerAttributes": {
-                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingOffer/v1/context.jsonld",
+                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingOffer/v1/context.jsonld",
                 "@type": "ChargingOffer",
-                "buyerFinderFee": {
-                  "feeType": "PERCENTAGE",
-                  "feeValue": 2.5
-                },
-                "idleFeePolicy": "\u20b92/min after 10 min post-charge"
+                "tariffModel": "PER_KWH",
+                "idleFeePolicy": {
+                  "currency": "INR",
+                  "value": 2,
+                  "applicableQuantity": {
+                    "unitCode": "MIN",
+                    "unitText": "minutes",
+                    "unitQuantity": 10
+                  }
+                }
               },
               "beckn:provider": "ecopower-charging"
             },
@@ -367,7 +353,7 @@
                 "schema:name": "Per-kWh Tariff - CCS2 120kW"
               },
               "beckn:items": [
-                "ev-charger-ccs2-002"
+                "IND*greencharge-koramangala*cs-02*IN*GC*KOR*01*CCS2*A*CCS2-B"
               ],
               "beckn:price": {
                 "currency": "INR",
@@ -385,18 +371,23 @@
               },
               "beckn:acceptedPaymentMethod": [
                 "UPI",
-                "Card",
-                "Wallet",
-                "NetBanking"
+                "CREDIT_CARD",
+                "WALLET",
+                "BANK_TRANSFER"
               ],
               "beckn:offerAttributes": {
-                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingOffer/v1/context.jsonld",
+                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingOffer/v1/context.jsonld",
                 "@type": "ChargingOffer",
-                "buyerFinderFee": {
-                  "feeType": "PERCENTAGE",
-                  "feeValue": 2.0
-                },
-                "idleFeePolicy": "\u20b93/min after 15 min post-charge"
+                "tariffModel": "PER_KWH",
+                "idleFeePolicy": {
+                  "currency": "INR",
+                  "value": 3,
+                  "applicableQuantity": {
+                    "unitCode": "MIN",
+                    "unitText": "minutes",
+                    "unitQuantity": 15
+                  }
+                }
               },
               "beckn:provider": "greencharge-koramangala"
             },
@@ -409,7 +400,7 @@
                 "schema:name": "Per-kWh Tariff - Type 2 22kW"
               },
               "beckn:items": [
-                "ev-charger-type2-001"
+                "IND*powergrid-indiranagar*cs-03*IN*PG*IND*01*TYPE2*A*TYPE2-A"
               ],
               "beckn:price": {
                 "currency": "INR",
@@ -427,17 +418,23 @@
               },
               "beckn:acceptedPaymentMethod": [
                 "UPI",
-                "Card",
-                "Wallet"
+                "CREDIT_CARD",
+                "WALLET",
+                "BANK_TRANSFER"
               ],
               "beckn:offerAttributes": {
-                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingOffer/v1/context.jsonld",
+                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingOffer/v1/context.jsonld",
                 "@type": "ChargingOffer",
-                "buyerFinderFee": {
-                  "feeType": "PERCENTAGE",
-                  "feeValue": 1.5
-                },
-                "idleFeePolicy": "\u20b91/min after 30 min post-charge"
+                "tariffModel": "PER_KWH",
+                "idleFeePolicy": {
+                  "currency": "INR",
+                  "value": 1,
+                  "applicableQuantity": {
+                    "unitCode": "MIN",
+                    "unitText": "minutes",
+                    "unitQuantity": 30
+                  }
+                }
               },
               "beckn:provider": "powergrid-indiranagar"
             }
@@ -449,50 +446,48 @@
   "select": {
     "message": {
       "order": {
-        "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+        "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
         "@type": "beckn:Order",
-        "beckn:id": "order-ev-charging-001",
-        "beckn:orderStatus": "QUOTE_RECEIVED",
-        "beckn:orderNumber": "ORD-2024-001",
+        "beckn:orderStatus": "CREATED",
         "beckn:seller": "ecopower-charging",
-        "beckn:buyer": "user-12345",
+        "beckn:buyer": {
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@type": "beckn:Buyer",
+          "beckn:id": "user-123",
+          "beckn:role": "BUYER",
+          "beckn:displayName": "Ravi Kumar",
+          "beckn:telephone": "+91-9876543210",
+          "beckn:email": "ravi.kumar@example.com",
+          "beckn:taxID": "GSTIN29ABCDE1234F1Z5"
+        },
         "beckn:orderItems": [
           {
-            "beckn:lineId": "line-001",
-            "beckn:orderedItem": "ev-charger-ccs2-001",
-            "beckn:quantity": 2.5,
+            "beckn:orderedItem": "IND*ecopower-charging*cs-01*IN*ECO*BTM*01*CCS2*A*CCS2-A",
+            "beckn:quantity": {
+              "unitText": "Kilowatt Hour",
+              "unitCode": "KWH",
+              "unitQuantity": 2.5
+            },
             "beckn:acceptedOffer": {
-              "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+              "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
               "@type": "beckn:Offer",
               "beckn:id": "offer-ccs2-60kw-kwh",
               "beckn:descriptor": {
                 "@type": "beckn:Descriptor",
                 "schema:name": "Per-kWh Tariff - CCS2 60kW"
               },
-              "beckn:items": ["ev-charger-ccs2-001"],
+              "beckn:items": [
+                "IND*ecopower-charging*cs-01*IN*ECO*BTM*01*CCS2*A*CCS2-A"
+              ],
+              "beckn:provider": "ecopower-charging",
               "beckn:price": {
                 "currency": "INR",
-                "value": 18.0,
+                "value": 45.0,
                 "applicableQuantity": {
                   "unitText": "Kilowatt Hour",
                   "unitCode": "KWH",
                   "unitQuantity": 1
                 }
-              },
-              "beckn:validity": {
-                "@type": "beckn:TimePeriod",
-                "schema:startDate": "2024-10-01T00:00:00Z",
-                "schema:endDate": "2025-01-15T23:59:59Z"
-              },
-              "beckn:acceptedPaymentMethod": ["UPI", "Card", "Wallet"],
-              "beckn:offerAttributes": {
-                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingOffer/v1/context.jsonld",
-                "@type": "ChargingOffer",
-                "buyerFinderFee": {
-                  "feeType": "PERCENTAGE",
-                  "feeValue": 2.5
-                },
-                "idleFeePolicy": "₹2/min after 10 min post-charge"
               }
             },
             "beckn:price": {
@@ -508,13 +503,13 @@
         ],
         "beckn:orderValue": {
           "currency": "INR",
-          "value": 128.64,
+          "value": 143.95,
           "components": [
             {
               "type": "UNIT",
-              "value": 100.0,
+              "value": 112.5,
               "currency": "INR",
-              "description": "Base charging session cost (100 INR)"
+              "description": "Base charging session cost (45 INR/kWh × 2.5 kWh)"
             },
             {
               "type": "SURCHARGE",
@@ -539,42 +534,25 @@
               "value": 13.64,
               "currency": "INR",
               "description": "Overcharge estimation"
+            },
+            {
+              "type": "FEE",
+              "value": 2.81,
+              "currency": "INR",
+              "description": "Buyer finder fee (2.5%)"
             }
           ]
         },
-        "beckn:payment": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
-          "@type": "beckn:Payment",
-          "beckn:id": "payment-123e4567-e89b-12d3-a456-426614174000",
-          "beckn:status": "NOT_PAID",
-          "beckn:amount": {
-            "currency": "INR",
-            "value": 128.64
+        "beckn:orderAttributes": {
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingSession/v1/context.jsonld",
+          "@type": "ChargingSession",
+          "buyerFinderFee": {
+            "feeType": "PERCENTAGE",
+            "feeValue": 2.5
           },
-          "beckn:paymentURL": "https://payments.bluechargenet-aggregator.io/pay?transaction_id=$transaction_id&amount=$amount",
-          "beckn:txnRef": "TXN-123456789",
-          "beckn:beneficiary": "BPP",
-          "beckn:acceptedPaymentMethod": ["BankTransfer", "UPI", "Wallet"]
-        },
-        "beckn:fulfillment": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
-          "@type": "beckn:Fulfillment",
-          "beckn:id": "fulfillment-charging-001",
-          "beckn:mode": "RESERVATION",
-          "beckn:status": "QUOTED",
-          "beckn:deliveryAttributes": {
-            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingSession/v1/context.jsonld",
-            "@type": "ChargingSession",
-            "sessionStatus": "PENDING",
-            "authorizationMode": "APP_QR",
-            "authorizationOtpHint": "Scan QR code at charging station",
-            "connectorType": "CCS2",
-            "maxPowerKW": 60,
-            "reservationId": "RESV-984532",
-            "gracePeriodMinutes": 10,
-            "trackingId": "TRK-984532",
-            "trackingUrl": "https://cpo.example.org/session/RESV-984532",
-            "trackingStatus": "ACTIVE"
+          "preferences": {
+            "startTime": "2025-12-20T10:00:00Z",
+            "endTime": "2025-12-20T11:30:00Z"
           }
         }
       }
@@ -583,14 +561,14 @@
   "init": {
     "message": {
       "order": {
-        "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+        "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
         "@type": "beckn:Order",
         "beckn:id": "order-123456",
         "beckn:orderStatus": "PENDING",
         "beckn:orderNumber": "ORD-2025-001",
         "beckn:seller": "cpo1.com",
         "beckn:buyer": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Buyer",
           "beckn:id": "user-123",
           "beckn:role": "BUYER",
@@ -610,7 +588,7 @@
             "beckn:lineId": "line-001",
             "beckn:orderedItem": "pe-charging-01",
             "beckn:acceptedOffer": {
-              "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+              "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
               "@type": "beckn:Offer",
               "beckn:id": "offer-001",
               "beckn:descriptor": {
@@ -632,7 +610,7 @@
                 "schema:endDate": "2025-04-27T23:59:59Z"
               },
               "beckn:offerAttributes": {
-                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingOffer/v1/context.jsonld",
+                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingOffer/v1/context.jsonld",
                 "@type": "ChargingOffer",
                 "offerType": "CHARGING_SESSION",
                 "buyerFinderFee": {
@@ -691,13 +669,13 @@
           ]
         },
         "beckn:fulfillment": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Fulfillment",
           "beckn:id": "fulfillment-001",
           "beckn:mode": "RESERVATION",
           "beckn:status": "PENDING",
           "beckn:deliveryAttributes": {
-            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingSession/v1/context.jsonld",
+            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingSession/v1/context.jsonld",
             "@type": "ChargingSession",
             "connectorType": "CCS2",
             "maxPowerKW": 50,
@@ -709,7 +687,7 @@
           }
         },
         "beckn:payment": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Payment",
           "beckn:id": "payment-123e4567-e89b-12d3-a456-426614174000",
           "beckn:status": "INITIATED",
@@ -720,10 +698,14 @@
           "beckn:paymentURL": "https://payments.bluechargenet-aggregator.io/pay?transaction_id=$transaction_id&amount=$amount",
           "beckn:txnRef": "TXN-123456789",
           "beckn:beneficiary": "BPP",
-          "beckn:acceptedPaymentMethod": ["BankTransfer", "UPI", "Wallet"]
+          "beckn:acceptedPaymentMethod": [
+            "BankTransfer",
+            "UPI",
+            "Wallet"
+          ]
         },
         "beckn:orderAttributes": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingSession/v1/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingSession/v1/context.jsonld",
           "@type": "ChargingSession",
           "sessionPreferences": {
             "preferredStartTime": "2025-01-27T10:00:00Z",
@@ -741,86 +723,49 @@
   "confirm": {
     "message": {
       "order": {
-        "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+        "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
         "@type": "beckn:Order",
-        "beckn:id": "order-bpp-789012",
+        "beckn:id": "order-ev-charging-001",
         "beckn:orderStatus": "CONFIRMED",
-        "beckn:orderNumber": "ORD-2025-001",
         "beckn:seller": "cpo1.com",
         "beckn:buyer": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Buyer",
           "beckn:id": "user-123",
           "beckn:role": "BUYER",
-          "beckn:name": "Ravi Kumar",
-          "beckn:organization": {
-            "descriptor": {
-              "name": "GreenCharge Pvt Ltd"
-            }
-          },
-          "beckn:address": "Apartment 123, MG Road, Bengaluru, Karnataka, 560001, India",
-          "beckn:email": "ravi.kumar@greencharge.com",
-          "beckn:phone": "+918765432100",
-          "beckn:taxId": "GSTIN29ABCDE1234F1Z5"
+          "beckn:displayName": "Ravi Kumar",
+          "beckn:telephone": "+91-9876543210",
+          "beckn:email": "ravi.kumar@example.com",
+          "beckn:taxID": "GSTIN29ABCDE1234F1Z5"
         },
         "beckn:orderItems": [
           {
-            "beckn:lineId": "line-001",
-            "beckn:orderedItem": "pe-charging-01",
-            "beckn:acceptedOffer": {
-              "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
-              "@type": "beckn:Offer",
-              "beckn:id": "offer-001",
-              "beckn:descriptor": {
-                "name": "EV Charging Session Offer",
-                "short_desc": "Fast charging session with CCS2 connector"
-              },
-              "beckn:price": {
-                "currency": "INR",
-                "value": 18.0,
-                "applicableQuantity": {
-                  "unitText": "Kilowatt Hour",
-                  "unitCode": "KWH",
-                  "unitQuantity": 1
-                }
-              },
-              "beckn:validity": {
-                "@type": "beckn:TimePeriod",
-                "schema:startDate": "2025-01-27T00:00:00Z",
-                "schema:endDate": "2025-04-27T23:59:59Z"
-              },
-              "beckn:offerAttributes": {
-                "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingOffer/v1/context.jsonld",
-                "@type": "ChargingOffer",
-                "offerType": "CHARGING_SESSION",
-                "buyerFinderFee": {
-                  "feeType": "PERCENTAGE",
-                  "feeValue": 2.0
-                },
-                "discountPercentage": 20.0
-              }
+            "beckn:orderedItem": "IND*ecopower-charging*cs-01*IN*ECO*BTM*01*CCS2*A*CCS2-A",
+            "beckn:quantity": {
+              "unitText": "Kilowatt Hour",
+              "unitCode": "KWH",
+              "unitQuantity": 2.5
             },
-            "beckn:quantity": 5,
             "beckn:price": {
               "currency": "INR",
-              "value": 90.0,
+              "value": 45.0,
               "applicableQuantity": {
                 "unitText": "Kilowatt Hour",
                 "unitCode": "KWH",
-                "unitQuantity": 5
+                "unitQuantity": 1
               }
             }
           }
         ],
         "beckn:orderValue": {
           "currency": "INR",
-          "value": 128.64,
+          "value": 143.95,
           "components": [
             {
               "type": "UNIT",
-              "value": 100.0,
+              "value": 112.5,
               "currency": "INR",
-              "description": "Base charging session cost (100 INR)"
+              "description": "Base charging session cost (45 INR/kWh × 2.5 kWh)"
             },
             {
               "type": "SURCHARGE",
@@ -845,53 +790,41 @@
               "value": 13.64,
               "currency": "INR",
               "description": "Overcharge estimation"
+            },
+            {
+              "type": "FEE",
+              "value": 2.81,
+              "currency": "INR",
+              "description": "Buyer finder fee (2.5%)"
             }
           ]
         },
         "beckn:fulfillment": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Fulfillment",
           "beckn:id": "fulfillment-001",
           "beckn:mode": "RESERVATION",
-          "beckn:status": "CONFIRMED",
           "beckn:deliveryAttributes": {
-            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingSession/v1/context.jsonld",
+            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingSession/v1/context.jsonld",
             "@type": "ChargingSession",
             "connectorType": "CCS2",
             "maxPowerKW": 50,
-            "vehicleMake": "Tata",
-            "vehicleModel": "Nexon EV"
+            "sessionStatus": "PENDING"
           }
         },
         "beckn:payment": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Payment",
           "beckn:id": "payment-123e4567-e89b-12d3-a456-426614174000",
-          "beckn:status": "PAID",
           "beckn:amount": {
             "currency": "INR",
-            "value": 128.64
+            "value": 143.95
           },
           "beckn:paymentURL": "https://payments.bluechargenet-aggregator.io/pay?transaction_id=$transaction_id&amount=$amount",
           "beckn:txnRef": "TXN-123456789",
-          "beckn:paidAt": "2025-01-27T10:05:00Z",
+          "beckn:paidAt": "2025-12-19T10:05:00Z",
           "beckn:beneficiary": "BPP",
-          "beckn:acceptedPaymentMethod": ["BankTransfer", "UPI", "Wallet"]
-        },
-        "beckn:orderAttributes": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingSession/v1/context.jsonld",
-          "@type": "ChargingSession",
-          "sessionPreferences": {
-            "preferredStartTime": "2025-01-27T10:00:00Z",
-            "preferredEndTime": "2025-01-27T11:30:00Z",
-            "notificationPreferences": {
-              "email": true,
-              "sms": true,
-              "push": false
-            }
-          },
-          "authorizationMode": "OTP",
-          "authorizationOtpHint": "OTP will be shared to the user's registered number to confirm order"
+          "beckn:paymentStatus": "COMPLETED"
         }
       }
     }
@@ -899,33 +832,36 @@
   "track": {
     "message": {
       "order": {
-        "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+        "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
         "@type": "beckn:Order",
-        "beckn:id": "order-bpp-789012",
-        "beckn:orderStatus": "ACTIVE",
+        "beckn:id": "order-ev-charging-001",
+        "beckn:orderStatus": "INPROGRESS",
+        "beckn:seller": "cpo1.com",
+        "beckn:buyer": {
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
+          "@type": "beckn:Buyer",
+          "beckn:id": "user-123"
+        },
         "beckn:orderItems": [
           {
-            "beckn:lineId": "line-001",
-            "beckn:orderedItem": "pe-charging-01"
+            "beckn:orderedItem": "IND*ecopower-charging*cs-01*IN*ECO*BTM*01*CCS2*A*CCS2-A"
           }
         ],
         "beckn:fulfillment": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Fulfillment",
           "beckn:id": "fulfillment-001",
           "beckn:mode": "RESERVATION",
-          "beckn:status": "ACTIVE",
           "trackingAction": {
-            "@type": "schema:TrackAction",
+            "@type": "beckn:TrackAction",
             "target": {
               "@type": "schema:EntryPoint",
               "url": "https://track.bluechargenet-aggregator.io/session/SESSION-9876543210"
-            },
-            "deliveryMethod": "RESERVATION",
-            "reservationId": "TRACK-SESSION-9876543210"
+            }
           },
-          "deliveryAttributes": {
-            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingService/v1/context.jsonld",
+          "sessionStatus": "ACTIVE",
+          "beckn:deliveryAttributes": {
+            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingService/v1/context.jsonld",
             "@type": "ChargingSession",
             "chargingTelemetry": [
               {
@@ -997,12 +933,6 @@
   "rating": {
     "message": {
       "received": true,
-      "aggregate": {
-        "count": 127,
-        "value": 4.6,
-        "best": 5,
-        "worst": 1
-      },
       "feedbackForm": {
         "url": "https://example-bpp.com/feedback/portal",
         "mime_type": "application/xml",
@@ -1018,7 +948,7 @@
         "email": "support@bluechargenet-aggregator.io",
         "url": "https://support.bluechargenet-aggregator.io/ticket/SUP-20250730-001",
         "hours": "Mon–Sun 24/7 IST",
-        "channels": ["phone", "email", "web", "chat"]
+        "channels": ["PHONE", "EMAIL", "WEB", "CHAT"]
       }
     }
   },
@@ -1036,7 +966,7 @@
           "@type": "beckn:Party",
           "beckn:id": "user-123",
           "beckn:role": "BUYER",
-          "beckn:name": "Ravi Kumar",
+          "beckn:displayName": "Ravi Kumar",
           "beckn:organization": {
             "descriptor": {
               "name": "GreenCharge Pvt Ltd"
@@ -1044,8 +974,8 @@
           },
           "beckn:address": "Apartment 123, MG Road, Bengaluru, Karnataka, 560001, India",
           "beckn:email": "ravi.kumar@greencharge.com",
-          "beckn:phone": "+918765432100",
-          "beckn:taxId": "GSTIN29ABCDE1234F1Z5"
+          "beckn:telephone": "+91-9876543210",
+          "beckn:taxID": "GSTIN29ABCDE1234F1Z5"
         },
         "beckn:orderItems": [
           {
@@ -1236,7 +1166,7 @@
         "beckn:orderNumber": "ORD-2025-001",
         "beckn:seller": "cpo1.com",
         "beckn:buyer": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Buyer",
           "beckn:id": "user-123",
           "beckn:role": "BUYER",
@@ -1343,7 +1273,7 @@
           "beckn:mode": "RESERVATION",
           "beckn:status": "CANCELLED",
           "beckn:deliveryAttributes": {
-            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingSession/v1/context.jsonld",
+            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingSession/v1/context.jsonld",
             "@type": "ChargingSession",
             "connectorType": "CCS2",
             "maxPowerKW": 50,
@@ -1352,7 +1282,7 @@
           }
         },
         "beckn:payment": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Payment",
           "beckn:id": "payment-123e4567-e89b-12d3-a456-426614174000",
           "beckn:status": "PAID",
@@ -1367,7 +1297,7 @@
           "beckn:acceptedPaymentMethod": ["BankTransfer", "UPI", "Wallet"]
         },
         "beckn:orderAttributes": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingSession/v1/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingSession/v1/context.jsonld",
           "@type": "ChargingSession",
           "sessionPreferences": {
             "preferredStartTime": "2025-01-27T10:00:00Z",
@@ -1387,14 +1317,14 @@
   "status": {
     "message": {
       "order": {
-        "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+        "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
         "@type": "beckn:Order",
         "beckn:id": "order-bpp-789012",
         "beckn:orderStatus": "ACTIVE",
         "beckn:orderNumber": "ORD-2025-001",
         "beckn:seller": "cpo1.com",
         "beckn:buyer": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Buyer",
           "beckn:id": "user-123",
           "beckn:role": "BUYER",
@@ -1495,7 +1425,7 @@
           ]
         },
         "beckn:fulfillment": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Fulfillment",
           "beckn:id": "fulfillment-001",
           "beckn:mode": "RESERVATION",
@@ -1510,7 +1440,7 @@
             "reservationId": "TRACK-SESSION-9876543210"
           },
           "beckn:deliveryAttributes": {
-            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingSession/v1/context.jsonld",
+            "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingSession/v1/context.jsonld",
             "@type": "ChargingSession",
             "sessionStatus": "INTERRUPTED",
             "connectorType": "CCS2",
@@ -1521,7 +1451,7 @@
           }
         },
         "beckn:payment": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/core/v2/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/core/v2/context.jsonld",
           "@type": "beckn:Payment",
           "beckn:id": "payment-123e4567-e89b-12d3-a456-426614174000",
           "beckn:status": "PAID",
@@ -1536,7 +1466,7 @@
           "beckn:acceptedPaymentMethod": ["BankTransfer", "UPI", "Wallet"]
         },
         "beckn:orderAttributes": {
-          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/draft/schema/EvChargingSession/v1/context.jsonld",
+          "@context": "https://raw.githubusercontent.com/beckn/protocol-specifications-new/refs/heads/main/schema/EvChargingSession/v1/context.jsonld",
           "@type": "ChargingSession",
           "sessionPreferences": {
             "preferredStartTime": "2025-01-27T10:00:00Z",

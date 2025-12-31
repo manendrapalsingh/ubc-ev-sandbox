@@ -223,6 +223,7 @@ Phase 2+: Direct BPP Communication
 ### API Documentation
 
 - **[API Collection Guide](./api-collection/README.md)**: Postman collections, Swagger specifications, and field documentation
+  - **Note**: All Swagger files and Postman collections are aligned. The `location` object has been removed from the context schema as it is not part of the standard Beckn protocol context. Location information for charging stations is available in the message body (e.g., `beckn:availableAt` in catalog items, `deliveryAttributes.location` in fulfillment).
 - **[Schema Documentation](./schemas/README.md)**: JSON schema definitions for validation
 
 ### Related Documentation

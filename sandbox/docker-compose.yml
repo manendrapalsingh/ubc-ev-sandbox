@@ -35,20 +35,20 @@ services:
 
   # Onix BAP Plugin
   onix-bap-plugin:
-    image: manendrapalsingh/onix-adapter:latest
+    image: manendrapalsingh/onix-adapter:v0.9.0
     pull_policy: always
     container_name: onix-bap-plugin
     ports:
       - "8001:8001"
+      - "9003:9003"
     volumes:
       # Mount config directory (writable for symlink creation, but original files won't be modified)
-      - ../onix-adaptor/config/onix-bap:/app/config/onix-bap
-      # Mount adapter.yaml directly to expected location
-      - ../onix-adaptor/config/onix-bap/adapter.yaml:/app/config/adapter.yaml:ro
+      - ${CONFIG_PATH:-../onix-adaptor/config}/onix-bap:/app/config
       # Mount schema directory (read-only)
       - ../schemas:/app/schemas:ro
     environment:
       - CONFIG_FILE=/app/config/adapter.yaml
+      - REDIS_PASSWORD=your-redis-password
     restart: unless-stopped
     depends_on:
       redis-onix-bap:
@@ -60,20 +60,20 @@ services:
 
   # Onix BPP Plugin
   onix-bpp-plugin:
-    image: manendrapalsingh/onix-adapter:latest
+    image: manendrapalsingh/onix-adapter:v0.9.0
     pull_policy: always
     container_name: onix-bpp-plugin
     ports:
       - "8002:8002"
+      - "9004:9004"
     volumes:
       # Mount config directory (writable for symlink creation, but original files won't be modified)
-      - ../onix-adaptor/config/onix-bpp:/app/config/onix-bpp
-      # Mount adapter.yaml directly to expected location
-      - ../onix-adaptor/config/onix-bpp/adapter.yaml:/app/config/adapter.yaml:ro
+      - ${CONFIG_PATH:-../onix-adaptor/config}/onix-bpp:/app/config
       # Mount schema directory (read-only)
       - ../schemas:/app/schemas:ro
     environment:
       - CONFIG_FILE=/app/config/adapter.yaml
+      - REDIS_PASSWORD=your-redis-password
     restart: unless-stopped
     depends_on:
       redis-onix-bpp:

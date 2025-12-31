@@ -20,6 +20,17 @@ http:
 pluginManager:
   root: /app/plugins
 
+plugins:
+  otelsetup:
+    id: otelsetup
+    config:
+      serviceName: "beckn-onix"
+      serviceVersion: "1.0.0"
+      enableMetrics: "true"
+      environment: "development"
+      metricsPort: "9004"
+
+
 modules:
   # BPP Receiver - Receives requests via HTTP and routes to backend via HTTP API
   # Phase 1: Receives discover from CDS (HTTP) -> routes to mock-bpp (HTTP)
@@ -55,16 +66,16 @@ modules:
           id: cache
           config:
             addr: redis-onix-bpp:6379
-        schemaValidator:
-          id: schemavalidator
-          config:
-            schemaDir: /app/schemas
+        # schemaValidator:
+        #   id: schemavalidator
+        #   config:
+        #     schemaDir: /app/schemas
         signValidator:
           id: signvalidator
         router:
           id: router
           config:
-            routingConfig: /app/config/onix-bpp/bpp_receiver_routing.yaml
+            routingConfig: /app/config/bpp_receiver_routing.yaml
         middleware:
           - id: reqpreprocessor
             config:
@@ -73,7 +84,7 @@ modules:
       steps:
         - validateSign
         - addRoute
-        - validateSchema
+        # - validateSchema
 
   # BPP Caller - Receives responses from backend via HTTP and sends HTTP
   # Phase 1: Receives on_discover from mock-bpp (HTTP) -> sends HTTP to mock-cds
@@ -110,14 +121,14 @@ modules:
           id: cache
           config:
             addr: redis-onix-bpp:6379
-        schemaValidator:
-          id: schemavalidator
-          config:
-            schemaDir: /app/schemas
+        # schemaValidator:
+        #   id: schemavalidator
+        #   config:
+        #     schemaDir: /app/schemas
         router:
           id: router
           config:
-            routingConfig: /app/config/onix-bpp/bpp_caller_routing.yaml
+            routingConfig: /app/config/bpp_caller_routing.yaml
         signer:
           id: signer
         middleware:
@@ -126,17 +137,8 @@ modules:
               uuidKeys: transaction_id,message_id
               role: bpp
       steps:
-        - validateSchema
+        # - validateSchema
         - addRoute
         - sign
 
-plugins:
-  - registry
-  - simplekeymanager
-  - cache
-  - schemavalidator
-  - signvalidator
-  - router
-  - signer
-  - reqpreprocessor
 

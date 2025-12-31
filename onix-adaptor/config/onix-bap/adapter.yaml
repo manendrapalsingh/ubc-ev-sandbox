@@ -20,6 +20,16 @@ http:
 pluginManager:
   root: /app/plugins
 
+plugins:
+  otelsetup:
+    id: otelsetup
+    config:
+      serviceName: "beckn-onix"
+      serviceVersion: "1.0.0"
+      enableMetrics: "true"
+      environment: "development"
+      metricsPort: "9003"
+
 modules:
   # BAP Receiver - Receives callbacks from CDS (Phase 1) and BPPs (Phase 2+)
   # Phase 1: Receives on_search from CDS with aggregated catalog
@@ -55,16 +65,16 @@ modules:
           id: cache
           config:
             addr: redis-onix-bap:6379
-        schemaValidator:
-          id: schemavalidator
-          config:
-            schemaDir: /app/schemas
+        # schemaValidator:
+        #   id: schemavalidator
+          # config:
+          #   schemaDir: /app/schemas
         signValidator:
           id: signvalidator
         router:
           id: router
           config:
-            routingConfig: /app/config/onix-bap/bap_receiver_routing.yaml
+            routingConfig: /app/config/bap_receiver_routing.yaml
         middleware:
           - id: reqpreprocessor
             config:
@@ -73,7 +83,7 @@ modules:
       steps:
         - validateSign
         - addRoute
-        - validateSchema
+        # - validateSchema
 
   # BAP Caller - Entry point for all requests from BAP
   # Phase 1: Routes search to external CDS for aggregation
@@ -110,14 +120,14 @@ modules:
           id: cache
           config:
             addr: redis-onix-bap:6379
-        schemaValidator:
-          id: schemavalidator
-          config:
-            schemaDir: /app/schemas
+        # schemaValidator:
+        #   id: schemavalidator
+        #   config:
+        #     schemaDir: /app/schemas
         router:
           id: router
           config:
-            routingConfig: /app/config/onix-bap/bap_caller_routing.yaml
+            routingConfig: /app/config/bap_caller_routing.yaml
         signer:
           id: signer
         middleware:
@@ -126,17 +136,7 @@ modules:
               uuidKeys: transaction_id,message_id
               role: bap
       steps:
-        - validateSchema
+        # - validateSchema
         - addRoute
         - sign
-
-plugins:
-  - registry
-  - simplekeymanager
-  - cache
-  - schemavalidator
-  - signvalidator
-  - router
-  - signer
-  - reqpreprocessor
 
