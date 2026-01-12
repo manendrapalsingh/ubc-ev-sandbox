@@ -72,8 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **`sandbox/docker-compose.yml`**:
   - Updated ONIX adapter Docker images from `latest` to `v0.9.0`:
-    - `onix-bap-plugin`: Updated to `manendrapalsingh/onix-adapter:v0.9.0`
-    - `onix-bpp-plugin`: Updated to `manendrapalsingh/onix-adapter:v0.9.0`
+    - `onix-bap-plugin`: Updated to `manendrapalsingh/onix-adapter:v0.9.1`
+    - `onix-bpp-plugin`: Updated to `manendrapalsingh/onix-adapter:v0.9.1`
   - Added metrics port mappings:
     - BAP adapter: `9003:9003`
     - BPP adapter: `9004:9004`
