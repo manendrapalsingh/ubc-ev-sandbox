@@ -8,60 +8,60 @@ This directory contains pre-formatted JSON messages and bash scripts for testing
 
 **🚀 Publish All Messages** - Automatically publishes all JSON files from `example/` directory:
 ```bash
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-all.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-all.sh
 ```
 
 **🎯 Publish Specific Action Type:**
 ```bash
 # Publish all discover variants (8 messages)
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-all.sh discover
+cd sandbox-rabbitMQ/message/bap/test && ./publish-all.sh discover
 
 # Publish select message
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-all.sh select
+cd sandbox-rabbitMQ/message/bap/test && ./publish-all.sh select
 
 # Publish init message
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-all.sh init
+cd sandbox-rabbitMQ/message/bap/test && ./publish-all.sh init
 
 # Publish confirm message
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-all.sh confirm
+cd sandbox-rabbitMQ/message/bap/test && ./publish-all.sh confirm
 
 # Publish update message
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-all.sh update
+cd sandbox-rabbitMQ/message/bap/test && ./publish-all.sh update
 
 # Publish track message
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-all.sh track
+cd sandbox-rabbitMQ/message/bap/test && ./publish-all.sh track
 
 # Publish cancel message
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-all.sh cancel
+cd sandbox-rabbitMQ/message/bap/test && ./publish-all.sh cancel
 
 # Publish rating message
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-all.sh rating
+cd sandbox-rabbitMQ/message/bap/test && ./publish-all.sh rating
 
 # Publish support message
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-all.sh support
+cd sandbox-rabbitMQ/message/bap/test && ./publish-all.sh support
 ```
 
 **📝 Publish Single Message:**
 ```bash
 # Discover messages
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-discover-along-a-route.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-discover-by-evse.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-discover-by-cpo.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-discover-by-station.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-discover-within-boundary.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-discover-within-timerange.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-discover-connector-spec.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-discover-vehicle-spec.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-discover-along-a-route.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-discover-by-evse.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-discover-by-cpo.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-discover-by-station.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-discover-within-boundary.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-discover-within-timerange.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-discover-connector-spec.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-discover-vehicle-spec.sh
 
 # Transaction messages
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-select.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-init.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-confirm.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-update.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-track.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-cancel.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-rating.sh
-cd sandbox/docker/monolithic/rabbitmq/message/bap/test && ./publish-support.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-select.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-init.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-confirm.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-update.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-track.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-cancel.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-rating.sh
+cd sandbox-rabbitMQ/message/bap/test && ./publish-support.sh
 ```
 
 **How `publish-all.sh` works:**
@@ -122,7 +122,7 @@ message/bap/
 
 1. **Navigate to the test directory**:
    ```bash
-   cd sandbox/docker/monolithic/rabbitmq/message/bap/test
+   cd sandbox-rabbitMQ/message/bap/test
    ```
 
 2. **Make scripts executable** (if not already):

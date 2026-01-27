@@ -74,8 +74,8 @@ modules:
             type: url
             location: https://raw.githubusercontent.com/beckn/protocol-specifications-v2/refs/heads/core-v2.0.0-rc/api/beckn.yaml
             cacheTTL: "3600"
-        signValidator:
-          id: signvalidator
+        # signValidator:
+        #   id: signvalidator
         router:
           id: router
           config:
@@ -88,6 +88,10 @@ modules:
             topic: bap.on_default
             compressionCodec: snappy
             acks: all
+            retries: "2147483647"
+            retryBackoffMs: "100"
+            deliveryTimeoutMs: "120000"
+            enableIdempotence: "true"
             admin.enabled: "on"
             admin.topicSpecs: '[{"topic":"bap.on_discover","numPartitions":1,"replicationFactor":1},{"topic":"bap.on_select","numPartitions":1,"replicationFactor":1},{"topic":"bap.on_init","numPartitions":1,"replicationFactor":1},{"topic":"bap.on_confirm","numPartitions":1,"replicationFactor":1},{"topic":"bap.on_status","numPartitions":1,"replicationFactor":1},{"topic":"bap.on_track","numPartitions":1,"replicationFactor":1},{"topic":"bap.on_cancel","numPartitions":1,"replicationFactor":1},{"topic":"bap.on_update","numPartitions":1,"replicationFactor":1},{"topic":"bap.on_rating","numPartitions":1,"replicationFactor":1},{"topic":"bap.on_support","numPartitions":1,"replicationFactor":1},{"topic":"bap.on_default","numPartitions":1,"replicationFactor":1}]'
         middleware:
@@ -96,7 +100,7 @@ modules:
               uuidKeys: transaction_id,message_id
               role: bap
       steps:
-        - validateSign
+        # - validateSign
         - validateSchema
         - addRoute
 
@@ -155,8 +159,8 @@ modules:
             consumer.groupId: bap_caller_group
             consumer.autoCommit: "false"
             consumer.commitInterval: "10s"
-            consumer.sessionTimeout: "30s"
-            consumer.heartbeatInterval: "3s"
+            consumer.sessionTimeout: "10s"
+            consumer.heartbeatInterval: "1s"
             consumer.maxPollInterval: "5m"
             consumer.rebalanceTimeout: "30s"
             consumer.fetchMinBytes: "1024"
@@ -168,7 +172,7 @@ modules:
             consumer.tlsCAFile: ""
             consumer.tlsCertFile: ""
             consumer.tlsKeyFile: ""
-            consumer.dialTimeout: "10s"
+            consumer.dialTimeout: "5s"
             consumer.admin.enabled: "on"
             consumer.admin.topicSpecs: '[{"topic":"bap.discover","numPartitions":1,"replicationFactor":1},{"topic":"bap.select","numPartitions":1,"replicationFactor":1},{"topic":"bap.init","numPartitions":1,"replicationFactor":1},{"topic":"bap.confirm","numPartitions":1,"replicationFactor":1},{"topic":"bap.status","numPartitions":1,"replicationFactor":1},{"topic":"bap.track","numPartitions":1,"replicationFactor":1},{"topic":"bap.cancel","numPartitions":1,"replicationFactor":1},{"topic":"bap.update","numPartitions":1,"replicationFactor":1},{"topic":"bap.rating","numPartitions":1,"replicationFactor":1},{"topic":"bap.support","numPartitions":1,"replicationFactor":1}]'
             steps: '["addRoute", "validateSchema", "sign"]'

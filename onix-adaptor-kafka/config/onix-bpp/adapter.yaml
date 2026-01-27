@@ -88,6 +88,10 @@ modules:
             topic: bpp.default
             compressionCodec: snappy
             acks: all
+            retries: "2147483647"
+            retryBackoffMs: "100"
+            deliveryTimeoutMs: "120000"
+            enableIdempotence: "true"
             admin.enabled: "on"
             admin.topicSpecs: '[{"topic":"bpp.discover","numPartitions":1,"replicationFactor":1},{"topic":"bpp.select","numPartitions":1,"replicationFactor":1},{"topic":"bpp.init","numPartitions":1,"replicationFactor":1},{"topic":"bpp.confirm","numPartitions":1,"replicationFactor":1},{"topic":"bpp.status","numPartitions":1,"replicationFactor":1},{"topic":"bpp.track","numPartitions":1,"replicationFactor":1},{"topic":"bpp.cancel","numPartitions":1,"replicationFactor":1},{"topic":"bpp.update","numPartitions":1,"replicationFactor":1},{"topic":"bpp.rating","numPartitions":1,"replicationFactor":1},{"topic":"bpp.support","numPartitions":1,"replicationFactor":1},{"topic":"bpp.default","numPartitions":1,"replicationFactor":1}]'
         middleware:
@@ -159,9 +163,9 @@ modules:
             consumer.tlsCAFile: ""
             consumer.tlsCertFile: ""
             consumer.tlsKeyFile: ""
-            consumer.dialTimeout: "10s"
-            consumer.sessionTimeout: "30s"
-            consumer.heartbeatInterval: "3s"
+            consumer.dialTimeout: "5s"
+            consumer.sessionTimeout: "10s"
+            consumer.heartbeatInterval: "1s"
             consumer.maxPollInterval: "5m"
             consumer.maxPollRecords: "500"
             consumer.rebalanceTimeout: "30s"

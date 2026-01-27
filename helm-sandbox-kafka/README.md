@@ -454,8 +454,8 @@ Once all services are deployed, you can access them via Kubernetes services:
 
 | Service | Service Name | Port | Description |
 |---------|--------------|------|-------------|
-| **Kafka** | `onix-bap-kafka` | 9092 | Kafka broker (from BAP release) |
-| **Kafka UI** | `onix-bap-kafka-ui` | 8080 | Kafka Management UI (from BAP release) |
+| **Kafka** | `onix-kafka` | 9092 | Kafka broker (from BAP release, shared with BPP) |
+| **Kafka UI** | `onix-kafka-ui` | 8080 | Kafka Management UI (from BAP release, shared with BPP) |
 | **Mock Registry** | `mock-registry` | 3030 | Registry service |
 | **Mock CDS** | `mock-cds` | 8082 | Catalog Discovery Service |
 | **ONIX BAP Plugin** | `onix-bap-service` | 8001 | HTTP endpoint for bapTxnReceiver |
@@ -492,7 +492,7 @@ To access services from your local machine manually:
 
 ```bash
 # Port forward Kafka UI
-kubectl port-forward -n ev-charging-sandbox svc/onix-bap-kafka-ui 8080:8080
+kubectl port-forward -n ev-charging-sandbox svc/onix-kafka-ui 8080:8080
 
 # Port forward Mock Registry
 kubectl port-forward -n ev-charging-sandbox svc/mock-registry 3030:3030
@@ -591,7 +591,7 @@ The Kafka UI provides a web-based interface for monitoring and managing Kafka.
 
 1. **Port forward the service**:
    ```bash
-   kubectl port-forward -n ev-charging-sandbox svc/onix-bap-kafka-ui 8080:8080
+   kubectl port-forward -n ev-charging-sandbox svc/onix-kafka-ui 8080:8080
    ```
    
    Or use the port-forward script:
@@ -662,7 +662,7 @@ kubectl logs -n ev-charging-sandbox -l app.kubernetes.io/component=bpp  # Logs f
 
 ```bash
 # Port forward Kafka UI and check topics via web UI
-kubectl port-forward -n ev-charging-sandbox svc/onix-bap-kafka-ui 8080:8080
+kubectl port-forward -n ev-charging-sandbox svc/onix-kafka-ui 8080:8080
 # Then open http://localhost:8080 in your browser
 
 # Or use kubectl exec to access Kafka pod

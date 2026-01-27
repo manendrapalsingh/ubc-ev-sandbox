@@ -41,7 +41,7 @@ In production, only the following services are deployed:
 - Helm 3.x installed
 - kubectl configured to access your cluster
 - Access to onix-adapter Docker images:
-  - `manendrapalsingh/onix-adapter:v0.9.2`
+  - `manendrapalsingh/onix-adapter:v0.9.3`
 - Persistent volume support (for Kafka and Redis if using persistent storage)
 
 ## Directory Structure

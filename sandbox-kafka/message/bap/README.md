@@ -8,31 +8,31 @@ This directory contains pre-formatted JSON messages and bash scripts for testing
 
 **🚀 Publish All Messages** - Automatically publishes all JSON files from `example/` directory:
 ```bash
-cd sandbox/docker/kafka/message/bap/test && ./publish-all.sh
+cd sandbox-kafka/message/bap/test && ./publish-all.sh
 ```
 
 **🎯 Publish Specific Action Type:**
 ```bash
 # Publish all discover variants (8 messages routed to topic bap.discover)
-cd sandbox/docker/kafka/message/bap/test && ./publish-all.sh discover
+cd sandbox-kafka/message/bap/test && ./publish-all.sh discover
 
 # Publish a single action family
-cd sandbox/docker/kafka/message/bap/test && ./publish-all.sh select
-cd sandbox/docker/kafka/message/bap/test && ./publish-all.sh cancel
-cd sandbox/docker/kafka/message/bap/test && ./publish-all.sh rating
+cd sandbox-kafka/message/bap/test && ./publish-all.sh select
+cd sandbox-kafka/message/bap/test && ./publish-all.sh cancel
+cd sandbox-kafka/message/bap/test && ./publish-all.sh rating
 ```
 
 **📝 Publish Single Message:**
 ```bash
 # Discover payloads (topic bap.discover)
-cd sandbox/docker/kafka/message/bap/test && ./publish-discover-along-a-route.sh
-cd sandbox/docker/kafka/message/bap/test && ./publish-discover-by-evse.sh
+cd sandbox-kafka/message/bap/test && ./publish-discover-along-a-route.sh
+cd sandbox-kafka/message/bap/test && ./publish-discover-by-evse.sh
 
 # Transaction payloads (topics bap.select, bap.init, …)
-cd sandbox/docker/kafka/message/bap/test && ./publish-select.sh
-cd sandbox/docker/kafka/message/bap/test && ./publish-init.sh
-cd sandbox/docker/kafka/message/bap/test && ./publish-confirm.sh
-cd sandbox/docker/kafka/message/bap/test && ./publish-track.sh
+cd sandbox-kafka/message/bap/test && ./publish-select.sh
+cd sandbox-kafka/message/bap/test && ./publish-init.sh
+cd sandbox-kafka/message/bap/test && ./publish-confirm.sh
+cd sandbox-kafka/message/bap/test && ./publish-track.sh
 ```
 
 ## Directory Structure

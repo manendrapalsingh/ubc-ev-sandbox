@@ -8,27 +8,27 @@ This directory contains pre-formatted JSON messages and bash scripts for testing
 
 **🚀 Publish All Messages** - Automatically publishes all JSON files from `example/` directory:
 ```bash
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh
 ```
 
 **🎯 Publish Specific Callback Type:**
 ```bash
 # Publish all callbacks (on_* actions) in sequence
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh
 
 # Publish only one callback family (all available actions):
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_discover
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_select
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_init
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_confirm
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_status
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_track
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_cancel
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_update
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_rating
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_support
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh catalog_publish
-cd sandbox/docker/monolithic/rabbitmq/message/bpp/test && ./publish-all.sh on_catalog_publish
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_discover
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_select
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_init
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_confirm
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_status
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_track
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_cancel
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_update
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_rating
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_support
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh catalog_publish
+cd sandbox-rabbitMQ/message/bpp/test && ./publish-all.sh on_catalog_publish
 ```
 
 > The `publish-all.sh` script automatically handles all example files in the `example/` directory.

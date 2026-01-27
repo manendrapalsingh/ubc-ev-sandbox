@@ -212,7 +212,7 @@ docker exec -i kafka kafka-console-producer.sh \
 
 1. **Port forward Kafka UI**:
    ```bash
-   kubectl port-forward svc/onix-bap-kafka-ui 8080:8080 -n ev-charging-sandbox
+   kubectl port-forward svc/onix-kafka-ui 8080:8080 -n ev-charging-sandbox
    ```
 
 2. **Open Kafka UI**: http://localhost:8080

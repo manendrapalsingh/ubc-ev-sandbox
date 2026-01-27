@@ -8,25 +8,25 @@ This directory contains pre-formatted JSON messages and bash scripts for testing
 
 **🚀 Publish All Messages** - Automatically publishes all JSON files from `example/` directory:
 ```bash
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh
 ```
 
 **🎯 Publish Specific Callback Type:**
 ```bash
 # Publish all callbacks (on_* actions) in sequence
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh
 
 # Publish only one callback family (all available actions):
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh on_discover
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh on_select
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh on_init
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh on_confirm
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh on_status
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh on_track
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh on_cancel
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh on_update
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh on_rating
-cd sandbox/docker/kafka/message/bpp/test && ./publish-all.sh on_support
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh on_discover
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh on_select
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh on_init
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh on_confirm
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh on_status
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh on_track
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh on_cancel
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh on_update
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh on_rating
+cd helm-sandbox-kafka/message/bpp/test && ./publish-all.sh on_support
 ```
 
 > The `publish-all.sh` script automatically handles all example files in the `example/` directory.

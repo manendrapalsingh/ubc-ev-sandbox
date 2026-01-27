@@ -4,7 +4,7 @@ Helm chart for deploying the ONIX BAP and BPP adapters with RabbitMQ, aligned wi
 
 ## Overview
 
-- **Image**: `manendrapalsingh/onix-adapter:v0.9.2` (single image for both BAP and BPP)
+- **Image**: `manendrapalsingh/onix-adapter:v0.9.3` (single image for both BAP and BPP)
 - **Config**: `CONFIG_FILE=/app/config/adapter.yaml`; config (adapter, routing, `plugin.yaml`) is mounted at `/app/config`
 - **Schema validation**: `schemav2validator` with upstream URL (`https://raw.githubusercontent.com/beckn/protocol-specifications-v2/...`); no local schema files or schema ConfigMap
 

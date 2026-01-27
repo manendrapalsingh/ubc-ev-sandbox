@@ -945,9 +945,8 @@ BPP uses a different application name:
 
 ## Next Steps
 
-- For RabbitMQ integration: See [Helm RabbitMQ](./../../rabbitmq/README.md)
-- For Kafka integration: See [Helm Kafka](./../../kafka/README.md)
-- For microservice architecture: See [Helm Microservice API](./../microservice/README.md)
+- For RabbitMQ integration: See [Helm RabbitMQ](../helm-rabbitmq/README.md)
+- For Kafka integration: See [Helm Kafka](../helm-kafka/README.md)
 
 ## Additional Resources
 

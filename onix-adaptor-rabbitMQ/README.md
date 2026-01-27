@@ -96,7 +96,7 @@ The RabbitMQ plugins are designed to handle BAP and BPP transactions using Rabbi
 
 Pre-built images are available from Docker Hub:
 
-- `manendrapalsingh/onix-adapter:v0.9.2` (unified image for both BAP and BPP)
+- `manendrapalsingh/onix-adapter:v0.9.3` (unified image for both BAP and BPP)
 
 ## Running with Docker Compose
 

@@ -8,31 +8,31 @@ This directory contains pre-formatted JSON messages and bash scripts for testing
 
 **🚀 Publish All Messages** - Automatically publishes all JSON files from `example/` directory:
 ```bash
-cd sandbox/helm/kafka/message/bap/test && ./publish-all.sh
+cd helm-sandbox-kafka/message/bap/test && ./publish-all.sh
 ```
 
 **🎯 Publish Specific Action Type:**
 ```bash
 # Publish all discover variants (8 messages routed to topic bap.discover)
-cd sandbox/helm/kafka/message/bap/test && ./publish-all.sh discover
+cd helm-sandbox-kafka/message/bap/test && ./publish-all.sh discover
 
 # Publish a single action family
-cd sandbox/helm/kafka/message/bap/test && ./publish-all.sh select
-cd sandbox/helm/kafka/message/bap/test && ./publish-all.sh cancel
-cd sandbox/helm/kafka/message/bap/test && ./publish-all.sh rating
+cd helm-sandbox-kafka/message/bap/test && ./publish-all.sh select
+cd helm-sandbox-kafka/message/bap/test && ./publish-all.sh cancel
+cd helm-sandbox-kafka/message/bap/test && ./publish-all.sh rating
 ```
 
 **📝 Publish Single Message:**
 ```bash
 # Discover payloads (topic bap.discover)
-cd sandbox/helm/kafka/message/bap/test && ./publish-discover-along-a-route.sh
-cd sandbox/helm/kafka/message/bap/test && ./publish-discover-by-evse.sh
+cd helm-sandbox-kafka/message/bap/test && ./publish-discover-along-a-route.sh
+cd helm-sandbox-kafka/message/bap/test && ./publish-discover-by-evse.sh
 
 # Transaction payloads (topics bap.select, bap.init, …)
-cd sandbox/helm/kafka/message/bap/test && ./publish-select.sh
-cd sandbox/helm/kafka/message/bap/test && ./publish-init.sh
-cd sandbox/helm/kafka/message/bap/test && ./publish-confirm.sh
-cd sandbox/helm/kafka/message/bap/test && ./publish-track.sh
+cd helm-sandbox-kafka/message/bap/test && ./publish-select.sh
+cd helm-sandbox-kafka/message/bap/test && ./publish-init.sh
+cd helm-sandbox-kafka/message/bap/test && ./publish-confirm.sh
+cd helm-sandbox-kafka/message/bap/test && ./publish-track.sh
 ```
 
 ## Directory Structure
